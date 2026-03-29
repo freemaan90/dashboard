@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f4f4;
+}
+
+.card {
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  width: 360px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.showButton {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.showButton:hover {
+  color: black;
+}
+
+.button {
+  padding: 12px;
+  background: #1e1e1e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #000;
+}
+
+.error {
+  color: #d33;
+  font-size: 14px;
+  text-align: center;
+}
+
+.registerText {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.registerLink {
+  color: #1e1e1e;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.registerLink:hover {
+  text-decoration: underline;
+}
