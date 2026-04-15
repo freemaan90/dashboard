@@ -40,11 +40,16 @@
   border-color: #555;
 }
 
-.passwordWrapper {
+.passwordWrapper, .emailWrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
+.passwordWrapper .input {
+  width: 100%;
+  padding-right: 48px;
+}
+
 
 .showButton {
   position: absolute;
@@ -94,5 +99,59 @@
 }
 
 .registerLink:hover {
+  text-decoration: underline;
+}
+
+.forgetPassword{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+}
+.forgotText {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: -4px; /* queda más pegado al input */
+}
+
+.forgotLink {
+  color: #1e1e1e;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* antes 16px, queda más compacto */
+}
+
+
+/* Reset */
+
+.success {
+  color: #0a7a0a;
+  font-size: 14px;
+  text-align: center;
+}
+
+.backText {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.backLink {
+  color: #1e1e1e;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.backLink:hover {
   text-decoration: underline;
 }

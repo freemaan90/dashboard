@@ -35,13 +35,15 @@ export default function LoginPage() {
         <h1 className={styles.title}>Iniciar sesión</h1>
 
         <form onSubmit={handleLogin} className={styles.form}>
-          <input
-            type="email"
-            placeholder="Email"
-            className={styles.input}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <div className={styles.emailWrapper}>
+            <input
+              type="email"
+              placeholder="Email"
+              className={styles.input}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
           <div className={styles.passwordWrapper}>
             <input
@@ -60,6 +62,16 @@ export default function LoginPage() {
               {showPass ? "Ocultar" : "Ver"}
             </button>
           </div>
+
+          <p className={styles.forgotText}>
+            ¿Olvidaste tu contraseña?{" "}
+            <span
+              className={styles.forgotLink}
+              onClick={() => router.push("/reset")}
+            >
+              Recuperala acá
+            </span>
+          </p>
 
           {errorMsg && <p className={styles.error}>{errorMsg}</p>}
 
