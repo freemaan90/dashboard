@@ -6,7 +6,9 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto; /* ← clave */
 }
+
 
 .title {
   font-size: 22px;
@@ -32,4 +34,6 @@
 
 .footer {
   margin-top: auto;
+  padding-bottom: 20px; /* ← esto sí es responsive */
 }
+

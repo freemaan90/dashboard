@@ -2,7 +2,7 @@
 
 import { env } from "@/config/envs";
 import { signOut } from "next-auth/react";
-
+import styles from './LogoutButton.module.css'
 export default function LogoutButton() {
   const handleLogout = async () => {
     await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`, {
@@ -16,7 +16,7 @@ export default function LogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="bg-red-600 text-white px-4 py-2 rounded"
+      className={styles.button}
     >
       Logout
     </button>

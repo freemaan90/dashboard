@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import styles from "./Sidebar.module.css";
-import LogoutButton from "../LogoutButton";
+import LogoutButton from "../LogutButton/LogoutButton";
 
 export default function Sidebar() {
   return (
@@ -11,8 +11,7 @@ export default function Sidebar() {
 
       <nav className={styles.nav}>
         <Link href="/dashboard">Inicio</Link>
-        <Link href="/dashboard/profile">Perfil</Link>
-        <Link href="/dashboard/admin">Admin</Link>
+        <Link href="/dashboard/whatsapp">WhatsApp</Link>
       </nav>
 
       <div className={styles.footer}>

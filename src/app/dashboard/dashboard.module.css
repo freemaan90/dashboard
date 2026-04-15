@@ -1,10 +1,11 @@
 .container {
   display: flex;
-  height: 100vh;
+  height: 100vh; /* mantiene el layout fijo */
+  overflow: hidden; /* evita scroll global */
 }
 
 .main {
   flex: 1;
   padding: 30px;
-  overflow-y: auto;
+  overflow-y: auto; /* scroll solo acá */
 }
