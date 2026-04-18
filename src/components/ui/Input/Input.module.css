@@ -1,0 +1,151 @@
+/**
+ * Input Styles
+ *
+ * Estilos para el componente Input usando CSS Modules y variables de tema.
+ * Estados: default, focus, error, disabled
+ * Soporta iconos leading/trailing y mensajes de helper/error.
+ *
+ * Requisitos: 3.2, 9.1, 9.2, 9.3, 9.4, 10.3
+ */
+
+/* ─── Contenedor raíz ───────────────────────────────────────────────────── */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+/* ─── Label ─────────────────────────────────────────────────────────────── */
+
+.label {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-tight);
+}
+
+/* ─── Wrapper (posiciona iconos e input) ────────────────────────────────── */
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--duration-fast) var(--easing-in-out),
+    box-shadow var(--duration-fast) var(--easing-in-out),
+    background-color var(--duration-fast) var(--easing-in-out);
+}
+
+.wrapper:hover:not(.wrapper--disabled) {
+  border-color: var(--color-input-border-hover);
+}
+
+/* Focus-within — cuando el input interno tiene foco */
+.wrapper:focus-within:not(.wrapper--disabled) {
+  border-color: var(--color-input-border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  outline: none;
+}
+
+/* Estado error */
+.wrapper--error {
+  border-color: var(--color-input-border-error);
+}
+
+.wrapper--error:focus-within {
+  border-color: var(--color-input-border-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+/* Estado disabled */
+.wrapper--disabled {
+  background-color: var(--color-input-bg-disabled);
+  border-color: var(--color-input-border);
+  cursor: not-allowed;
+}
+
+/* ─── Input ─────────────────────────────────────────────────────────────── */
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-2) var(--spacing-3);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-input-text);
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--color-input-placeholder);
+}
+
+.input:disabled {
+  color: var(--color-input-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Ajuste de padding cuando hay iconos */
+.input--has-leading {
+  padding-left: var(--spacing-1);
+}
+
+.input--has-trailing {
+  padding-right: var(--spacing-1);
+}
+
+/* ─── Iconos ────────────────────────────────────────────────────────────── */
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-text-tertiary);
+}
+
+.icon--leading {
+  padding-left: var(--spacing-3);
+}
+
+.icon--trailing {
+  padding-right: var(--spacing-3);
+}
+
+/* ─── Texto de ayuda ────────────────────────────────────────────────────── */
+
+.helper {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-small);
+  color: var(--color-text-tertiary);
+  line-height: var(--line-height-tight);
+}
+
+/* ─── Mensaje de error ──────────────────────────────────────────────────── */
+
+.error {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-small);
+  color: var(--color-error-text);
+  line-height: var(--line-height-tight);
+}
+
+/* ─── Accesibilidad: movimiento reducido ────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper {
+    transition: none;
+  }
+}

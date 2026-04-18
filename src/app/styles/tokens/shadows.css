@@ -1,0 +1,19 @@
+/* Tokens de Sombras - Niveles de Elevación */
+/* Requisitos: 1.5 - 4 niveles de elevación */
+
+:root {
+  /* Elevación 0 - Sin sombra */
+  --shadow-none: none;
+
+  /* Elevación 1 - Sutil (cards, inputs en reposo) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  /* Elevación 2 - Baja (cards con hover, dropdowns) */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  /* Elevación 3 - Media (modales, popovers) */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Elevación 4 - Alta (drawers, overlays) */
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}

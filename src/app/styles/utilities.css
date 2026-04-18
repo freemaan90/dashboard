@@ -1,0 +1,89 @@
+/**
+ * Utilidades CSS
+ *
+ * Clases utilitarias globales para los patrones más reutilizados.
+ * Prefijo `.u-` para distinguirlas de clases de componentes.
+ *
+ * Para estilos específicos de componente, usar CSS Modules.
+ *
+ * Requisitos: 13.3, 13.4
+ */
+
+/* ─── Layout: Display ───────────────────────────────────────────────────── */
+
+.u-flex {
+  display: flex;
+}
+
+.u-inline-flex {
+  display: inline-flex;
+}
+
+.u-grid {
+  display: grid;
+}
+
+.u-block {
+  display: block;
+}
+
+.u-hidden {
+  display: none;
+}
+
+/* ─── Layout: Flexbox ───────────────────────────────────────────────────── */
+
+.u-flex-col {
+  flex-direction: column;
+}
+
+.u-flex-1 {
+  flex: 1;
+}
+
+.u-items-center {
+  align-items: center;
+}
+
+.u-justify-center {
+  justify-content: center;
+}
+
+.u-justify-between {
+  justify-content: space-between;
+}
+
+/* ─── Layout: Sizing ────────────────────────────────────────────────────── */
+
+.u-w-full {
+  width: 100%;
+}
+
+.u-min-h-screen {
+  min-height: 100vh;
+}
+
+/* ─── Spacing ───────────────────────────────────────────────────────────── */
+
+.u-mx-auto {
+  margin-inline: auto;
+}
+
+/* ─── Text ──────────────────────────────────────────────────────────────── */
+
+.u-text-center {
+  text-align: center;
+}
+
+/* Screen-reader only — visually hidden but accessible */
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

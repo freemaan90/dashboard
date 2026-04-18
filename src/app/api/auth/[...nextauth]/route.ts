@@ -1,7 +1,8 @@
 import { env } from "@/config/envs";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-const handler = NextAuth({
+
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -10,15 +11,14 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
 
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        // 1) LOGIN en NestJS (esto setea cookies httpOnly)
+        // 1) LOGIN en NestJS — el backend responde con cookies httpOnly
         const loginRes = await fetch(
           `${env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
           {
             method: "POST",
-            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               email: credentials.email,
@@ -27,31 +27,35 @@ const handler = NextAuth({
           },
         );
 
-
-
         if (!loginRes.ok) return null;
 
-        const cookies = loginRes.headers.get("set-cookie");
+        // 2) Extraer el access_token de las cookies de la respuesta
+        const setCookie = loginRes.headers.get("set-cookie") ?? "";
+        const accessTokenMatch = setCookie.match(/access_token=([^;]+)/);
+        const accessToken = accessTokenMatch?.[1] ?? null;
 
-        // 2) Pedimos el usuario real
+        if (!accessToken) return null;
+
+        // 3) Pedir el usuario usando el token como Bearer
         const meRes = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/me`, {
           method: "GET",
           headers: {
-            Cookie: cookies ?? "",
+            Authorization: `Bearer ${accessToken}`,
           },
-          credentials: "include",
         });
+
         if (!meRes.ok) return null;
 
         const user = await meRes.json();
 
-        // 3) NextAuth exige un User con id
+        // 4) Retornar user con accessToken incluido
         return {
           id: String(user.id),
           name: user.name,
           lastName: user.lastName,
           phone: user.phone,
           email: user.email,
+          accessToken,
         };
       },
     }),
@@ -63,26 +67,23 @@ const handler = NextAuth({
 
   callbacks: {
     async jwt({ token, user }) {
-      // Cuando el usuario inicia sesión
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.accessToken = user.accessToken;
       }
       return token;
     },
 
     async session({ session, token }) {
-      // Refrescamos el usuario desde NestJS
-      const meRes = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/me`, {
-        credentials: "include",
-      });
+      session.accessToken = token.accessToken;
 
-      if (meRes.ok) {
-        const user = await meRes.json();
-        session.user = user;
-      } else {
-        // ❗ NextAuth NO acepta null
-        session.user = undefined;
+      if (token.id) {
+        session.user = {
+          ...(session.user as object),
+          id: token.id,
+          email: token.email,
+        } as typeof session.user;
       }
 
       return session;
@@ -92,6 +93,8 @@ const handler = NextAuth({
   pages: {
     signIn: "/login",
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

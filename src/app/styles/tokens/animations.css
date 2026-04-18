@@ -1,0 +1,49 @@
+/* Tokens de Animaciones - Duraciones y Funciones de Easing */
+/* Requisitos: 8.1 - duraciones estándar, 8.2 - funciones de easing naturales, 8.7 - prefers-reduced-motion */
+
+:root {
+  /* Duraciones */
+
+  /* Rápida - transiciones de hover, cambios de color */
+  --duration-fast: 150ms;
+
+  /* Normal - aparición de elementos, cambios de estado */
+  --duration-normal: 300ms;
+
+  /* Lenta - modales, animaciones de entrada complejas */
+  --duration-slow: 500ms;
+
+  /* Funciones de Easing */
+
+  /* Ease-in-out - movimientos que aceleran y desaceleran (uso general) */
+  --easing-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Ease-out - elementos que entran a la vista (deceleran al llegar) */
+  --easing-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Ease-in - elementos que salen de la vista (aceleran al salir) */
+  --easing-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Propiedades de control de movimiento
+   * --motion-safe: 1 cuando las animaciones están permitidas, 0 cuando están reducidas.
+   * Uso: transition-duration: calc(var(--motion-safe) * 300ms);
+   */
+  --motion-safe: 1;
+  --motion-reduce: 0;
+}
+
+/* Accesibilidad: respetar preferencia de movimiento reducido */
+/* Requisito: 8.7 - respetar prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Duraciones mínimas (1ms) para mantener transiciones esenciales de estado
+     * sin causar movimiento perceptible */
+    --duration-fast: 1ms;
+    --duration-normal: 1ms;
+    --duration-slow: 1ms;
+
+    /* Invertir flags de movimiento */
+    --motion-safe: 0;
+    --motion-reduce: 1;
+  }
+}

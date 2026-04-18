@@ -1,0 +1,25 @@
+/**
+ * Spacing Tokens
+ *
+ * Sistema de tokens de espaciado para el Dashboard WhatsApp Sender
+ * Define escala de espaciado basada en múltiplos de 8px:
+ * 0, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96
+ *
+ * Requisitos: 1.4
+ */
+
+:root {
+  /* Spacing Scale - Múltiplos de 8px */
+  --spacing-0:  0px;
+  --spacing-1:  4px;   /* 0.5 × 8px */
+  --spacing-2:  8px;   /* 1 × 8px */
+  --spacing-3:  12px;  /* 1.5 × 8px */
+  --spacing-4:  16px;  /* 2 × 8px */
+  --spacing-6:  24px;  /* 3 × 8px */
+  --spacing-8:  32px;  /* 4 × 8px */
+  --spacing-10: 40px;  /* 5 × 8px */
+  --spacing-12: 48px;  /* 6 × 8px */
+  --spacing-16: 64px;  /* 8 × 8px */
+  --spacing-20: 80px;  /* 10 × 8px */
+  --spacing-24: 96px;  /* 12 × 8px */
+}

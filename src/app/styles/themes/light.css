@@ -1,0 +1,132 @@
+/**
+ * Light Theme
+ *
+ * Mapea los tokens de color a variables semánticas de tema para el modo claro.
+ * Aplicado en :root como tema predeterminado y también disponible via [data-theme="light"].
+ *
+ * Contraste de colores de texto verificado para cumplir WCAG 2.1 AA:
+ * - Texto normal: mínimo 4.5:1
+ * - Texto grande / elementos UI: mínimo 3:1
+ *
+ * Resultados de auditoría (tarea 21.3):
+ * - text-primary (neutral-900) on bg-base/surface: 16.98–17.74:1 ✅
+ * - text-secondary (neutral-700) on bg-base/surface: 9.86–10.31:1 ✅
+ * - text-tertiary (neutral-500) on bg-base/surface: 4.63–4.83:1 ✅
+ * - text-disabled (neutral-400): exento por WCAG 1.4.3 (componentes deshabilitados)
+ * - btn-primary (white on primary-600): 5.17:1 ✅
+ * - btn-secondary (neutral-700 on neutral-100): 9.37:1 ✅
+ * - btn-outline (primary-600 on white): 5.17:1 ✅
+ * - btn-ghost (neutral-700 on white): 10.31:1 ✅
+ * - btn-danger (white on error-600 #dc2626): 4.83:1 ✅ (corregido de error-500 3.76:1)
+ * - success/warning/error/info text on bg: 4.79–6.16:1 ✅
+ * - nav-text (neutral-600 on white): 7.56:1 ✅
+ * - nav-text-active (primary-600 on primary-50): 4.75:1 ✅
+ * - input-placeholder (neutral-500 on white): 4.83:1 ✅ (corregido de neutral-400 2.54:1)
+ * - border-focus (primary-500 on white): 3.68:1 ✅ (UI element, mínimo 3:1)
+ * - error-border (error-500 on white): 3.76:1 ✅ (UI element, mínimo 3:1)
+ *
+ * Requisitos: 2.1, 2.2, 2.3, 2.4, 2.5, 2.7
+ */
+
+:root,
+[data-theme="light"] {
+  /* ─── Colores de Marca ─────────────────────────────────────────────────── */
+  --color-brand-primary:        var(--color-primary-600);   /* #2563eb */
+  --color-brand-primary-hover:  var(--color-primary-700);   /* #1d4ed8 */
+  --color-brand-primary-active: var(--color-primary-800);   /* #1e40af */
+  --color-brand-primary-subtle: var(--color-primary-50);    /* #eff6ff */
+  --color-brand-primary-muted:  var(--color-primary-100);   /* #dbeafe */
+
+  /* ─── Colores de Texto ─────────────────────────────────────────────────── */
+  --color-text-primary:   var(--color-neutral-900);   /* #111827 */
+  --color-text-secondary: var(--color-neutral-700);   /* #374151 */
+  --color-text-tertiary:  var(--color-neutral-500);   /* #6b7280 */
+  --color-text-disabled:  var(--color-neutral-400);   /* #9ca3af */
+  --color-text-inverse:   #ffffff;
+  --color-text-on-primary: #ffffff;
+
+  /* ─── Colores de Fondo / Superficie ───────────────────────────────────── */
+  --color-bg-base:     var(--color-neutral-50);    /* #f9fafb */
+  --color-bg-surface:  #ffffff;
+  --color-bg-elevated: #ffffff;
+  --color-bg-overlay:  rgba(17, 24, 39, 0.5);
+  --color-bg-subtle:   var(--color-neutral-100);   /* #f3f4f6 */
+  --color-bg-muted:    var(--color-neutral-200);   /* #e5e7eb */
+
+  /* ─── Colores de Borde ─────────────────────────────────────────────────── */
+  --color-border-default: var(--color-neutral-200);   /* #e5e7eb */
+  --color-border-strong:  var(--color-neutral-300);   /* #d1d5db */
+  --color-border-focus:   var(--color-primary-500);   /* #3b82f6 */
+
+  /* ─── Colores Semánticos — Éxito ───────────────────────────────────────── */
+  --color-success-bg:     var(--color-success-50);
+  --color-success-border: var(--color-success-500);
+  --color-success-text:   var(--color-success-700);
+  --color-success-icon:   var(--color-success-500);
+
+  /* ─── Colores Semánticos — Advertencia ────────────────────────────────── */
+  --color-warning-bg:     var(--color-warning-50);
+  --color-warning-border: var(--color-warning-500);
+  --color-warning-text:   var(--color-warning-700);
+  --color-warning-icon:   var(--color-warning-500);
+
+  /* ─── Colores Semánticos — Error ───────────────────────────────────────── */
+  --color-error-bg:     var(--color-error-50);
+  --color-error-border: var(--color-error-500);
+  --color-error-text:   var(--color-error-700);
+  --color-error-icon:   var(--color-error-500);
+
+  /* ─── Colores Semánticos — Información ────────────────────────────────── */
+  --color-info-bg:     var(--color-info-50);
+  --color-info-border: var(--color-info-500);
+  --color-info-text:   var(--color-info-700);
+  --color-info-icon:   var(--color-info-500);
+
+  /* ─── Colores de Componentes Interactivos ─────────────────────────────── */
+  --color-btn-primary-bg:           var(--color-primary-600);
+  --color-btn-primary-bg-hover:     var(--color-primary-700);
+  --color-btn-primary-bg-active:    var(--color-primary-800);
+  --color-btn-primary-text:         #ffffff;
+  --color-btn-primary-border:       var(--color-primary-600);
+
+  --color-btn-secondary-bg:         var(--color-neutral-100);
+  --color-btn-secondary-bg-hover:   var(--color-neutral-200);
+  --color-btn-secondary-bg-active:  var(--color-neutral-300);
+  --color-btn-secondary-text:       var(--color-neutral-700);
+  --color-btn-secondary-border:     var(--color-neutral-300);
+
+  --color-btn-outline-bg:           transparent;
+  --color-btn-outline-bg-hover:     var(--color-primary-50);
+  --color-btn-outline-text:         var(--color-primary-600);
+  --color-btn-outline-border:       var(--color-primary-600);
+
+  --color-btn-ghost-bg:             transparent;
+  --color-btn-ghost-bg-hover:       var(--color-neutral-100);
+  --color-btn-ghost-text:           var(--color-neutral-700);
+  --color-btn-ghost-border:         transparent;
+
+  --color-btn-danger-bg:            var(--color-error-600);   /* #dc2626 — 4.83:1 with white, meets WCAG 4.5:1 */
+  --color-btn-danger-bg-hover:      var(--color-error-700);
+  --color-btn-danger-text:          #ffffff;
+  --color-btn-danger-border:        var(--color-error-600);   /* #dc2626 */
+
+  /* ─── Colores de Inputs ────────────────────────────────────────────────── */
+  --color-input-bg:             #ffffff;
+  --color-input-bg-disabled:    var(--color-neutral-100);
+  --color-input-border:         var(--color-neutral-300);
+  --color-input-border-hover:   var(--color-neutral-400);
+  --color-input-border-focus:   var(--color-primary-500);
+  --color-input-border-error:   var(--color-error-500);
+  --color-input-text:           var(--color-neutral-900);
+  --color-input-placeholder:    var(--color-neutral-500);   /* #6b7280 — 4.83:1 on white, meets WCAG 3:1 */
+  --color-input-text-disabled:  var(--color-neutral-400);
+
+  /* ─── Colores de Navegación ────────────────────────────────────────────── */
+  --color-nav-bg:               #ffffff;
+  --color-nav-border:           var(--color-neutral-200);
+  --color-nav-text:             var(--color-neutral-600);
+  --color-nav-text-hover:       var(--color-neutral-900);
+  --color-nav-text-active:      var(--color-primary-600);
+  --color-nav-bg-active:        var(--color-primary-50);
+  --color-nav-bg-hover:         var(--color-neutral-50);
+}

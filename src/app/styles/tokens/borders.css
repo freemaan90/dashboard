@@ -1,0 +1,19 @@
+/* Tokens de Bordes - Radios de Borde */
+/* Requisitos: 1.6 - radios none, sm, md, lg, full */
+
+:root {
+  /* Sin radio */
+  --radius-none: 0px;
+
+  /* Radio pequeño (inputs, badges) */
+  --radius-sm: 4px;
+
+  /* Radio medio (cards, botones) */
+  --radius-md: 8px;
+
+  /* Radio grande (modales, paneles) */
+  --radius-lg: 12px;
+
+  /* Radio completo (pills, avatares) */
+  --radius-full: 9999px;
+}

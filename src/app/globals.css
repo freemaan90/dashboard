@@ -1,6 +1,28 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+/**
+ * Global Styles
+ *
+ * Punto de entrada principal de estilos para el Dashboard WhatsApp Sender.
+ * Importa en orden:
+ *   1. Tokens de diseño (colores, tipografía, espaciado, sombras, bordes, animaciones)
+ *   2. Tema claro (mapea tokens a variables semánticas)
+ *   3. Estilos base y reset CSS
+ *
+ * Requisitos: 15.1, 15.10
+ */
 
+/* ─── 1. Tokens de Diseño ───────────────────────────────────────────────── */
+@import './styles/tokens/colors.css';
+@import './styles/tokens/typography.css';
+@import './styles/tokens/spacing.css';
+@import './styles/tokens/shadows.css';
+@import './styles/tokens/borders.css';
+@import './styles/tokens/animations.css';
+
+/* ─── 2. Tema Claro (predeterminado) ────────────────────────────────────── */
+@import './styles/themes/light.css';
+
+/* ─── 3. Estilos Base y Reset ───────────────────────────────────────────── */
+@import './styles/base.css';
+
+/* ─── 4. Utilidades Globales ────────────────────────────────────────────── */
+@import './styles/utilities.css';

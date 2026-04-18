@@ -1,0 +1,320 @@
+/**
+ * Base Styles & CSS Reset
+ *
+ * CSS reset moderno y estilos base para el Dashboard WhatsApp Sender.
+ * Establece defaults consistentes entre navegadores y aplica los tokens
+ * de diseño a los elementos HTML fundamentales.
+ *
+ * Requisitos: 15.1 (fuente sans-serif moderna), 15.10 (carga optimizada de fuentes)
+ * Requisitos: 20.6, 20.8, 20.9, 20.10 (fallbacks y progressive enhancement)
+ */
+
+/* ─── Box Sizing ────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ─── Reset de Márgenes y Padding ───────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Documento y Scroll ────────────────────────────────────────────────── */
+html {
+  /* Scroll suave para anclas y navegación interna */
+  scroll-behavior: smooth;
+  /* Prevenir ajuste de tamaño de fuente en iOS al rotar */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Altura completa para layouts de página completa */
+  height: 100%;
+}
+
+/* ─── Body ──────────────────────────────────────────────────────────────── */
+body {
+  /* Fuente sans-serif moderna usando Inter (Requisito 15.1) */
+  /* Fallback: system-ui → sans-serif para navegadores sin soporte de variable CSS */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-family-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  /* Fallback: 16px antes de la variable CSS */
+  font-size: 16px;
+  font-size: var(--font-size-body, 16px);
+  font-weight: 400;
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.5;
+  line-height: var(--line-height-normal, 1.5);
+  letter-spacing: 0;
+  letter-spacing: var(--letter-spacing-normal, 0);
+
+  /* Colores del tema — fallback a valores estáticos (Requisito 20.8) */
+  color: #111827;
+  color: var(--color-text-primary, #111827);
+  background-color: #f9fafb;
+  background-color: var(--color-bg-base, #f9fafb);
+
+  /* Renderizado de fuente optimizado */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  /* Altura mínima para layouts de página completa */
+  min-height: 100%;
+}
+
+/* ─── Tipografía ────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.25;
+  line-height: var(--line-height-tight, 1.25);
+  letter-spacing: -0.025em;
+  letter-spacing: var(--letter-spacing-tight, -0.025em);
+  color: #111827;
+  color: var(--color-text-primary, #111827);
+}
+
+h1 { font-size: 32px; font-size: var(--font-size-h1, 32px); }
+h2 { font-size: 24px; font-size: var(--font-size-h2, 24px); }
+h3 { font-size: 20px; font-size: var(--font-size-h3, 20px); }
+h4 { font-size: 18px; font-size: var(--font-size-h4, 18px); }
+h5 { font-size: 16px; font-size: var(--font-size-body, 16px); }
+h6 { font-size: 14px; font-size: var(--font-size-small, 14px); }
+
+p {
+  line-height: var(--line-height-normal);
+  max-width: 65ch;
+}
+
+small {
+  font-size: var(--font-size-small);
+}
+
+/* ─── Elementos de Texto ────────────────────────────────────────────────── */
+strong, b {
+  font-weight: var(--font-weight-bold);
+}
+
+em, i {
+  font-style: italic;
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+}
+
+/* ─── Enlaces ───────────────────────────────────────────────────────────── */
+a {
+  color: #2563eb;
+  color: var(--color-brand-primary, #2563eb);
+  text-decoration: none;
+  transition: color 150ms ease-in-out;
+  transition: color var(--duration-fast, 150ms) var(--easing-in-out, ease-in-out);
+  cursor: pointer;
+}
+
+a:hover {
+  color: #1d4ed8;
+  color: var(--color-brand-primary-hover, #1d4ed8);
+}
+
+a:active {
+  color: #1e40af;
+  color: var(--color-brand-primary-active, #1e40af);
+}
+
+/* ─── Listas ────────────────────────────────────────────────────────────── */
+ul, ol {
+  list-style: none;
+}
+
+/* ─── Imágenes y Media ──────────────────────────────────────────────────── */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/* ─── Formularios ───────────────────────────────────────────────────────── */
+input, button, textarea, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Ensure all interactive roles have pointer cursor */
+[role="button"],
+[role="link"],
+[role="menuitem"],
+[role="tab"],
+[role="option"],
+label[for],
+summary {
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ─── Tablas ────────────────────────────────────────────────────────────── */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ─── Accesibilidad — Foco (WCAG 2.1 AA) ───────────────────────────────── */
+/* Indicador de foco visible para navegación por teclado (Requisito 10.2) */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-border-focus, #2563eb);
+  outline-offset: 2px;
+}
+
+/* Ocultar outline solo cuando se usa ratón */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Foco visible en enlaces con radio de borde */
+a:focus-visible {
+  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-border-focus, #2563eb);
+  outline-offset: 2px;
+  border-radius: 4px;
+  border-radius: var(--radius-sm, 4px);
+}
+
+/* ─── Skip to content ───────────────────────────────────────────────────── */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  left: var(--spacing-4, 16px);
+  z-index: 9999;
+  padding: 8px 16px;
+  padding: var(--spacing-2, 8px) var(--spacing-4, 16px);
+  background-color: #2563eb;
+  background-color: var(--color-primary-600, #2563eb);
+  color: white;
+  border-radius: 6px;
+  border-radius: var(--radius-md, 6px);
+  font-weight: 600;
+  font-weight: var(--font-weight-semibold, 600);
+  text-decoration: none;
+  transition: top 150ms ease-in-out;
+  transition: top var(--duration-fast, 150ms) var(--ease-in-out, ease-in-out);
+}
+
+.skip-to-content:focus {
+  top: 16px;
+  top: var(--spacing-4, 16px);
+}
+
+/* ─── Accesibilidad — Movimiento Reducido (Requisito 8.7) ───────────────── */
+/*
+ * Respeta la preferencia del sistema operativo para movimiento reducido.
+ * Se desactivan animaciones decorativas pero se mantienen transiciones
+ * esenciales de estado (ej: cambios de color en foco/hover) usando
+ * duraciones mínimas de 0.01ms en lugar de 0ms.
+ *
+ * Los tokens --motion-safe y --motion-reduce se definen en animations.css
+ * y se pueden usar en componentes para condicionar animaciones:
+ *   transition-duration: calc(var(--motion-safe) * 300ms);
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Utilidades de Accesibilidad ───────────────────────────────────────── */
+/* Clase para ocultar visualmente pero mantener accesible para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ─── Selección de Texto ────────────────────────────────────────────────── */
+::selection {
+  background-color: #bfdbfe;
+  background-color: var(--color-brand-primary-muted, #bfdbfe);
+  color: #111827;
+  color: var(--color-text-primary, #111827);
+}
+
+/* ─── Progressive Enhancement — @supports fallbacks (Requisito 20.6, 20.8) ── */
+/*
+ * Estilos base para navegadores que no soportan CSS Custom Properties.
+ * Los navegadores modernos sobreescriben estos valores con las variables CSS.
+ * Esto garantiza que la UI sea funcional incluso sin soporte de variables CSS.
+ */
+@supports not (color: var(--test)) {
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    color: #111827;
+    background-color: #f9fafb;
+  }
+
+  a {
+    color: #2563eb;
+  }
+
+  a:hover {
+    color: #1d4ed8;
+  }
+
+  :focus-visible {
+    outline: 2px solid #2563eb;
+  }
+}
+
+/* ─── Progressive Enhancement — gap fallback para flexbox ───────────────── */
+/*
+ * Navegadores más antiguos (Safari < 14.1) no soportan gap en flexbox.
+ * Usamos margin como fallback y luego lo anulamos con @supports.
+ * (Requisito 20.9, 20.10)
+ */
+.flex-gap-fallback > * + * {
+  margin-left: 8px;
+}
+
+@supports (gap: 8px) {
+  .flex-gap-fallback {
+    gap: 8px;
+  }
+
+  .flex-gap-fallback > * + * {
+    margin-left: 0;
+  }
+}

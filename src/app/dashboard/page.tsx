@@ -9,6 +9,7 @@ export default async function DashboardPage() {
 
       <pre style={{ marginTop: 20 }}>
         {JSON.stringify(session?.user, null, 2)}
+        asd
       </pre>
     </div>
   );

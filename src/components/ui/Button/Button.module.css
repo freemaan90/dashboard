@@ -1,0 +1,261 @@
+/**
+ * Button Styles
+ *
+ * Estilos para el componente Button usando CSS Modules y variables de tema.
+ * Variantes: primary, secondary, outline, ghost, danger
+ * Tamaños: sm, md, lg
+ * Estados: hover, active, disabled, loading
+ *
+ * Requisitos: 3.1, 10.1, 10.2, 10.3
+ */
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--easing-in-out),
+    border-color var(--duration-fast) var(--easing-in-out),
+    color var(--duration-fast) var(--easing-in-out),
+    box-shadow var(--duration-fast) var(--easing-in-out),
+    transform var(--duration-fast) var(--easing-in-out);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Focus visible — indicador de foco claro para accesibilidad (Req 10.2) */
+.button:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Active — efecto de escala sutil al hacer clic */
+.button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Disabled */
+.button:disabled,
+.button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+/* ─── Variantes ─────────────────────────────────────────────────────────── */
+
+/* Primary */
+.button--primary {
+  background-color: var(--color-btn-primary-bg);
+  border-color: var(--color-btn-primary-border);
+  color: var(--color-btn-primary-text);
+}
+
+.button--primary:hover:not(:disabled) {
+  background-color: var(--color-btn-primary-bg-hover);
+  border-color: var(--color-btn-primary-bg-hover);
+}
+
+.button--primary:active:not(:disabled) {
+  background-color: var(--color-btn-primary-bg-active);
+  border-color: var(--color-btn-primary-bg-active);
+}
+
+/* Secondary */
+.button--secondary {
+  background-color: var(--color-btn-secondary-bg);
+  border-color: var(--color-btn-secondary-border);
+  color: var(--color-btn-secondary-text);
+}
+
+.button--secondary:hover:not(:disabled) {
+  background-color: var(--color-btn-secondary-bg-hover);
+}
+
+.button--secondary:active:not(:disabled) {
+  background-color: var(--color-btn-secondary-bg-active);
+}
+
+/* Outline */
+.button--outline {
+  background-color: var(--color-btn-outline-bg);
+  border-color: var(--color-btn-outline-border);
+  color: var(--color-btn-outline-text);
+}
+
+.button--outline:hover:not(:disabled) {
+  background-color: var(--color-btn-outline-bg-hover);
+}
+
+.button--outline:active:not(:disabled) {
+  background-color: var(--color-primary-100, #dbeafe);
+}
+
+/* Ghost */
+.button--ghost {
+  background-color: var(--color-btn-ghost-bg);
+  border-color: var(--color-btn-ghost-border);
+  color: var(--color-btn-ghost-text);
+}
+
+.button--ghost:hover:not(:disabled) {
+  background-color: var(--color-btn-ghost-bg-hover);
+}
+
+.button--ghost:active:not(:disabled) {
+  background-color: var(--color-neutral-200, #e5e7eb);
+}
+
+/* Danger */
+.button--danger {
+  background-color: var(--color-btn-danger-bg);
+  border-color: var(--color-btn-danger-border);
+  color: var(--color-btn-danger-text);
+}
+
+.button--danger:hover:not(:disabled) {
+  background-color: var(--color-btn-danger-bg-hover);
+  border-color: var(--color-btn-danger-bg-hover);
+}
+
+.button--danger:active:not(:disabled) {
+  background-color: var(--color-error-700, #b91c1c);
+  border-color: var(--color-error-700, #b91c1c);
+}
+
+/* ─── Tamaños ───────────────────────────────────────────────────────────── */
+
+.button--sm {
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-small);
+  gap: var(--spacing-1);
+}
+
+.button--md {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-body);
+}
+
+.button--lg {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-h4);
+}
+
+/* ─── Icono solo ────────────────────────────────────────────────────────── */
+
+.button--icon-only.button--sm {
+  padding: var(--spacing-1);
+  width: 28px;
+  height: 28px;
+}
+
+.button--icon-only.button--md {
+  padding: var(--spacing-2);
+  width: 36px;
+  height: 36px;
+}
+
+.button--icon-only.button--lg {
+  padding: var(--spacing-3);
+  width: 44px;
+  height: 44px;
+}
+
+/* ─── Estado de carga ───────────────────────────────────────────────────── */
+
+.button--loading {
+  cursor: wait;
+}
+
+/* ─── Elementos internos ────────────────────────────────────────────────── */
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  transition: opacity var(--duration-fast) var(--easing-in-out);
+}
+
+.button--loading .label {
+  opacity: 0.7;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ─── Spinner ───────────────────────────────────────────────────────────── */
+
+.spinner {
+  display: inline-block;
+  border-radius: var(--radius-full);
+  border-style: solid;
+  border-color: currentColor transparent transparent transparent;
+  animation: spin var(--duration-normal, 300ms) linear infinite;
+  flex-shrink: 0;
+  /* Fade-in when spinner appears */
+  animation-fill-mode: both;
+}
+
+.spinner--sm {
+  width: 12px;
+  height: 12px;
+  border-width: 1.5px;
+}
+
+.spinner--md {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.spinner--lg {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Accesibilidad: respetar preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+
+  .button:active:not(:disabled) {
+    transform: none;
+  }
+
+  .label {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
+    opacity: 0.6;
+  }
+}

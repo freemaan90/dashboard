@@ -1,0 +1,71 @@
+/**
+ * Spinner Styles
+ *
+ * Animación de rotación suave para el indicador de carga.
+ * Tamaños: sm (16px), md (24px), lg (32px)
+ * Respeta prefers-reduced-motion mediante los tokens de animación.
+ *
+ * Requisitos: 3.6, 11.2, 10.3
+ */
+
+/* ─── Keyframes ─────────────────────────────────────────────────────────── */
+
+@keyframes spinner-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-brand-primary, currentColor);
+}
+
+.spinner__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: spinner-rotate var(--duration-normal, 300ms) linear infinite;
+}
+
+/* Respeta prefers-reduced-motion: detiene la animación si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  .spinner__svg {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* ─── Track (círculo de fondo) ──────────────────────────────────────────── */
+
+.spinner__track {
+  stroke: var(--color-text-tertiary, currentColor);
+  opacity: 0.25;
+}
+
+/* ─── Arc (arco giratorio) ──────────────────────────────────────────────── */
+
+.spinner__arc {
+  stroke: currentColor;
+}
+
+/* ─── Tamaños ───────────────────────────────────────────────────────────── */
+
+.spinner--sm {
+  width: 16px;
+  height: 16px;
+}
+
+.spinner--md {
+  width: 24px;
+  height: 24px;
+}
+
+.spinner--lg {
+  width: 32px;
+  height: 32px;
+}
