@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export default async function DashboardPage() {
-  const session = await getServerSession();
-  console.log("Session in DashboardPage:", session);
+  const session = await getServerSession(authOptions);
   return (
     <div>
       <h1>Bienvenido {session?.user?.name}</h1>

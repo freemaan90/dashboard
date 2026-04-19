@@ -44,6 +44,7 @@ export async function sendWhatsappMessage(payload: SendMessagePayload): Promise<
       'Content-Type': 'application/json',
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
+    credentials: "include",
     body: JSON.stringify(body),
     cache: 'no-store',
   });

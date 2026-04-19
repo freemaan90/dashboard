@@ -28,6 +28,7 @@ export default function ResetPasswordPage() {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, newPassword }),
+        credentials: "include"
       });
 
       if (!res.ok) {

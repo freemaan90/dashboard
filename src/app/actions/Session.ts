@@ -1,7 +1,7 @@
-'use server';
+"use server";
 
-import { getToken } from 'next-auth/jwt';
-import { cookies, headers } from 'next/headers';
+import { getToken } from "next-auth/jwt";
+import { cookies, headers } from "next/headers";
 
 const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -12,7 +12,7 @@ async function getAccessToken(): Promise<string | null> {
   // Construir un objeto request-like que getToken pueda usar
   const req = {
     cookies: Object.fromEntries(
-      cookieStore.getAll().map((c) => [c.name, c.value])
+      cookieStore.getAll().map((c) => [c.name, c.value]),
     ),
     headers: Object.fromEntries(headerStore.entries()),
   };
@@ -29,22 +29,23 @@ export async function createWhatsappSession(sessionId: string) {
   const token = await getAccessToken();
 
   if (!token) {
-    throw new Error('No autorizado');
+    throw new Error("No autorizado");
   }
 
   const createRes = await fetch(`${API_URL}/whatsapp-sender/sessions`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ sessionId }),
-    cache: 'no-store',
+    cache: "no-store",
+    credentials: "include",
   });
 
   if (!createRes.ok) {
     const error = await createRes.json().catch(() => ({}));
-    throw new Error(error.message || 'No se pudo crear la sesión de WhatsApp');
+    throw new Error(error.message || "No se pudo crear la sesión de WhatsApp");
   }
 
   const data = await createRes.json();
@@ -56,21 +57,25 @@ export async function deleteSessionById(sessionId: string) {
   const token = await getAccessToken();
 
   if (!token) {
-    throw new Error('No autorizado');
+    throw new Error("No autorizado");
   }
 
-  const deleteResp = await fetch(`${API_URL}/whatsapp-sender/sessions/${sessionId}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+  const deleteResp = await fetch(
+    `${API_URL}/whatsapp-sender/sessions/${sessionId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+      credentials: "include",
     },
-    cache: 'no-store',
-  });
+  );
 
   if (!deleteResp.ok) {
     const error = await deleteResp.json().catch(() => ({}));
-    throw new Error(error.message || 'No se pudo borrar la sesión de WhatsApp');
+    throw new Error(error.message || "No se pudo borrar la sesión de WhatsApp");
   }
 
   return await deleteResp.json();
@@ -78,10 +83,10 @@ export async function deleteSessionById(sessionId: string) {
 
 export async function getSessions() {
   const cookieStore = await cookies();
-  const token = cookieStore.get('whatsapp_token')?.value;
+  const token = cookieStore.get("whatsapp_token")?.value;
 
   if (!token) {
-    throw new Error('No autorizado');
+    throw new Error("No autorizado");
   }
 
   const url = `${process.env.BACKEND_URL}/whatsapp-sender/sessions`;
@@ -90,8 +95,9 @@ export async function getSessions() {
     method: "GET",
     cache: "no-store",
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
+    credentials: "include",
   });
 
   if (!res.ok) {

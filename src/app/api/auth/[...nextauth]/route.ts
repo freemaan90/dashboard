@@ -42,6 +42,7 @@ export const authOptions: NextAuthOptions = {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
+          credentials: "include"
         });
 
         if (!meRes.ok) return null;
