@@ -1,0 +1,118 @@
+/**
+ * SimpleMessageForm — CSS Module
+ * Requisitos: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.title {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* ── Textarea field ── */
+.fieldRoot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.label {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 6rem;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  transition: border-color var(--duration-fast) var(--easing-in-out),
+              box-shadow var(--duration-fast) var(--easing-in-out);
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 3px var(--color-brand-focus-ring, rgba(59, 130, 246, 0.2));
+}
+
+.textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--color-bg-subtle);
+}
+
+.textareaError {
+  border-color: var(--color-error-border, #f87171);
+}
+
+.textareaError:focus {
+  border-color: var(--color-error-border, #f87171);
+  box-shadow: 0 0 0 3px var(--color-error-focus-ring, rgba(248, 113, 113, 0.2));
+}
+
+.fieldError {
+  font-size: var(--font-size-xs);
+  color: var(--color-error-text);
+}
+
+/* ── Feedback messages ── */
+.successMsg {
+  font-size: var(--font-size-small);
+  color: var(--color-success-text, #16a34a);
+  background-color: var(--color-success-bg, #f0fdf4);
+  border: 1px solid var(--color-success-border, #bbf7d0);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+.errorMsg {
+  font-size: var(--font-size-small);
+  color: var(--color-error-text);
+  background-color: var(--color-error-bg, #fef2f2);
+  border: 1px solid var(--color-error-border, #fecaca);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+/* ── Actions ── */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.submitButton {
+  width: 100%;
+}
+
+.backButton {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .textarea {
+    transition: none;
+  }
+}

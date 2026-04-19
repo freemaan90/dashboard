@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import styles from "./Sidebar.module.css";
-import LogoutButton from "../LogoutButton/LogoutButton";
+import LogoutButton from "../ui/LogoutButton/LogoutButton";
 
 export default function Sidebar() {
   return (

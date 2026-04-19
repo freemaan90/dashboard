@@ -1,0 +1,65 @@
+/**
+ * SuccessView — CSS Module
+ * Requirements: 2.1, 2.2, 2.3, 2.4, 5.1, 5.2, 5.3
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding-block: var(--spacing-6);
+}
+
+.iconWrapper {
+  color: var(--color-success-text, #16a34a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.successTitle {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.sessionInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.sessionLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sessionId {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-subtle);
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--radius-sm);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  width: 100%;
+  margin-top: var(--spacing-2);
+}
+
+.closeError {
+  font-size: var(--font-size-small);
+  color: var(--color-error-text);
+  text-align: center;
+  margin-top: var(--spacing-1);
+}

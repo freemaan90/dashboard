@@ -27,6 +27,8 @@ import {
   Activity,
   Users,
   MessageSquare,
+  Send,
+  ArrowLeft,
   type LucideProps,
 } from 'lucide-react';
 import styles from './Icon.module.css';
@@ -60,6 +62,8 @@ const iconMap = {
   Activity,
   Users,
   MessageSquare,
+  Send,
+  ArrowLeft,
 } as const;
 
 export type IconName = keyof typeof iconMap;

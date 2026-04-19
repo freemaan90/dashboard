@@ -24,7 +24,16 @@ async function getAccessToken(): Promise<string | null> {
   return (token?.accessToken as string) ?? null;
 }
 
-export const getSessionStatus = async (sessionId: string): Promise<{ qrBase64?: string; status?: string }> => {
+export interface SessionStatus {
+  sessionId: string;
+  isReady: boolean;
+  qrBase64: string | null;
+  hasBrowser: boolean;
+  hasPage: boolean;
+  lastRestart: number;
+}
+
+export const getSessionStatus = async (sessionId: string): Promise<SessionStatus> => {
   const token = await getAccessToken();
 
   const res = await fetch(`${API_URL}/whatsapp-sender/sessions/${sessionId}/status`, {
@@ -32,7 +41,7 @@ export const getSessionStatus = async (sessionId: string): Promise<{ qrBase64?: 
     cache: 'no-store',
   });
 
-  if (!res.ok) return {};
+  if (!res.ok) throw new Error(`Session not found: ${res.status}`);
 
   return res.json();
 };
