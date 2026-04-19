@@ -4,17 +4,22 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./signup.module.css";
 import { env } from "@/config/envs";
+import { registerAction } from "../actions/User";
+import { UserInterface } from "@/interfaces/User.interface";
 
 export default function SignupPage() {
   const router = useRouter();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<UserInterface>({
     name: "",
     lastName: "",
     phone: "",
     email: "",
     password: "",
     confirmPassword: "",
+    role: "OWNER",
+    company: "",
+    companyLogo: "",
   });
 
   const [showPass, setShowPass] = useState(false);
@@ -29,24 +34,9 @@ export default function SignupPage() {
       return;
     }
 
-    const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: form.name,
-        lastName: form.lastName,
-        phone: form.phone,
-        email: form.email,
-        password: form.password,
-      }),
+    await registerAction({
+      ...form,
     });
-
-    if (!res.ok) {
-      setErrorMsg("Error creando usuario");
-      return;
-    }
-
-    router.push("/login");
   };
 
   return (
@@ -77,6 +67,22 @@ export default function SignupPage() {
             className={styles.input}
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          />
+
+          <input
+            type="text"
+            placeholder="Empresa"
+            className={styles.input}
+            value={form.company}
+            onChange={(e) => setForm({ ...form, company: e.target.value })}
+          />
+
+          <input
+            type="text"
+            placeholder="Lgogo de la empresa (URL)"
+            className={styles.input}
+            value={form.companyLogo}
+            onChange={(e) => setForm({ ...form, companyLogo: e.target.value })}
           />
 
           <input

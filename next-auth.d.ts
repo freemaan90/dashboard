@@ -1,34 +1,30 @@
-import NextAuth from "next-auth";
+import { UserInterface } from "@/interfaces/User.interface";
+
+type UserBase = Omit<UserInterface, "password" | "confirmPassword" | "company" | "companyLogo">;
 
 declare module "next-auth" {
-  interface User {
+  interface User extends UserBase {
     id: string;
-    name: string;
-    lastName: string;
-    phone: string;
-    email: string;
     accessToken: string;
-    role:string
+    company?: string;
+    companyLogo?: string;
   }
 
   interface Session {
-    user?: {
+    user?: UserBase & {
       id: string;
-      name: string;
-      lastName: string;
-      phone: string;
-      email: string;
-      role:string
+      company?: string;
+      companyLogo?: string;
     };
     accessToken?: string;
   }
 }
 
 declare module "next-auth/jwt" {
-  interface JWT {
+  interface JWT extends UserBase {
     id: string;
-    email: string;
     accessToken: string;
-    role: string;
+    company?: string;
+    companyLogo?: string;
   }
 }
