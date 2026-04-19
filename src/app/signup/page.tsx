@@ -29,7 +29,7 @@ export default function SignupPage() {
       return;
     }
 
-    const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/user/new`, {
+    const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
