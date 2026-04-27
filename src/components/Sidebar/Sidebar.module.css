@@ -1,39 +1,78 @@
 .sidebar {
   width: 240px;
   height: 100vh;
-  background: #1e1e1e;
-  color: white;
-  padding: 20px;
+  background: #141414;
+  color: #fff;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* ← clave */
+  overflow-y: auto;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  object-fit: cover;
+}
 
 .title {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+
+.separator {
+  margin: 24px 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .nav a {
-  color: #ddd;
+  color: #cfcfcf;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .nav a:hover {
-  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff !important;
+  font-weight: 500;
 }
 
 .footer {
   margin-top: auto;
-  padding-bottom: 20px; /* ← esto sí es responsive */
+  padding-top: 20px;
 }
-

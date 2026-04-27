@@ -1,12 +1,3 @@
-/**
- * Input Component
- *
- * Componente de input reutilizable con soporte para label, helper text,
- * mensajes de error, estados y iconos opcionales.
- *
- * Requisitos: 3.2, 9.1, 9.2, 9.3, 9.4, 10.3
- */
-
 import React, { forwardRef, useId } from 'react';
 import styles from './Input.module.css';
 
