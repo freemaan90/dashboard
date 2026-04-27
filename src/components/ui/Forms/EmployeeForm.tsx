@@ -10,9 +10,10 @@ interface Props {
   companyLogo: string;
   id: string;
   accessToken?: string;
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const EmployeeForm = ({ accessToken,company, companyLogo, id }: Props) => {
+export const EmployeeForm = ({ setShowForm,accessToken,company, companyLogo, id }: Props) => {
   const {
     form,
     setForm,
@@ -98,7 +99,7 @@ export const EmployeeForm = ({ accessToken,company, companyLogo, id }: Props) =>
       >
         Agregar empleado
       </button>
-      <button className={styles.button}>Cerrar</button>
+      <button onClick={()=> setShowForm(false)} className={styles.button}>Cerrar</button>
     </form>
   );
 };

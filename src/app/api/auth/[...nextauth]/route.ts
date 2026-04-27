@@ -60,6 +60,7 @@ export const authOptions: NextAuthOptions = {
           company: user.company,
           companyLogo: user.companyLogo,
           accessToken,
+          ownerId: user.ownerId
         };
       },
     }),
@@ -81,6 +82,7 @@ export const authOptions: NextAuthOptions = {
         token.accessToken = user.accessToken;
         token.company = user.company;
         token.companyLogo = user.companyLogo;
+        token.ownerId = user.ownerId
       }
       return token;
     },
@@ -97,6 +99,7 @@ export const authOptions: NextAuthOptions = {
         role: token.role,
         company: token.company,
         companyLogo: token.companyLogo,
+        ownerId: token.ownerId || null,
       };
 
       return session;

@@ -9,7 +9,7 @@ import { Employees, UserSession } from "@/interfaces/User.interface";
 export const EmployeeContainer = ({
   employees,
   userSession,
-  accessToken
+  accessToken,
 }: {
   employees: Employees[];
   userSession: UserSession;
@@ -29,7 +29,13 @@ export const EmployeeContainer = ({
 
       {showForm ? (
         <div className={styles.form}>
-          <EmployeeForm accessToken={accessToken} id={id} company={company} companyLogo={companyLogo} />
+          <EmployeeForm
+            setShowForm={setShowForm}
+            accessToken={accessToken}
+            id={id}
+            company={company}
+            companyLogo={companyLogo}
+          />
         </div>
       ) : (
         <EmployeeList employees={employees} />

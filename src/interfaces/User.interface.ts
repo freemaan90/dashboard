@@ -8,6 +8,7 @@ export interface UserInterface {
   role: "OWNER" | "SUPERVISOR" | "EMPLOYEE";
   company: string;
   companyLogo: string;
+  ownerId: string | null;
 }
 
 export interface Employees {

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { UserInterface } from "@/interfaces/User.interface";
 import { registerAction } from "@/app/actions/User";
 import { env } from "@/config/envs";
+import { redirect } from "next/navigation";
 
 export const useUserForm = (
   initialRole: "OWNER" | "EMPLOYEE",
@@ -18,6 +19,7 @@ export const useUserForm = (
     role: initialRole,
     company: "",
     companyLogo: "",
+    ownerId: null,
   });
 
   const [showPass, setShowPass] = useState(false);
@@ -35,14 +37,20 @@ export const useUserForm = (
   };
 
   const handleEmployeeSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
       setErrorMsg("Las contraseñas no coinciden");
       return false;
     }
 
-    const body = { ...form, confirmPassword: undefined, company: undefined, companyLogo: undefined, ownerId: undefined };
+    const body = {
+      ...form,
+      confirmPassword: undefined,
+      company: undefined,
+      companyLogo: undefined,
+      ownerId: undefined,
+    };
 
     const res = await fetch(
       `${env.NEXT_PUBLIC_BACKEND_URL}/user/new-employee`,
@@ -71,8 +79,7 @@ export const useUserForm = (
       }
       return false;
     }
-
-    return true;
+    redirect("/dashboard");
   };
 
   return {
