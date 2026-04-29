@@ -62,3 +62,39 @@ export async function getEmployees(ownerId: number):Promise<Employees[]> {
   }
   return res.json();
 }
+
+export async function startResetPasswordFlow(email: string) {
+  const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/request-password-reset`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Error iniciando el proceso de recuperación de contraseña");
+  }
+
+  redirect("/login");
+}
+
+export async function validateResetToken(token: string) {
+  const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/validate-reset-token?token=${token}`);
+  if (!res.ok) {
+    throw new Error("Token inválido o expirado");
+  }
+  return res.json();
+}
+
+export async function resetPassword(token: string, newPassword: string, confirmPassword: string) {
+  const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/reset-password`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token, newPassword, confirmPassword }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Error al actualizar la contraseña");
+  }
+
+  redirect("/login");
+}

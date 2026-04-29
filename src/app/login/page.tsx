@@ -67,7 +67,7 @@ export default function LoginPage() {
             ¿Olvidaste tu contraseña?{" "}
             <span
               className={styles.forgotLink}
-              onClick={() => router.push("/reset")}
+              onClick={() => router.push("/forgot-password")}
             >
               Recuperala acá
             </span>

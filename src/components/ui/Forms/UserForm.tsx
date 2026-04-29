@@ -2,15 +2,13 @@
 import { useRouter } from "next/navigation";
 import styles from "./UserForm.module.css";
 import { useUserForm } from "@/hooks/useUserForm";
+import { InputPassword } from "../Input/InputPassword";
+import { PasswordType, Roles } from "@/enum/Roles";
 export const UserForm = () => {
   const router = useRouter();
   const {
     form,
     setForm,
-    showPass,
-    setShowPass,
-    showConfirmPass,
-    setShowConfirmPass,
     errorMsg,
     handleSubmit,
   } = useUserForm("OWNER");
@@ -69,45 +67,9 @@ export const UserForm = () => {
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
 
-          {/* Password */}
-          <div className={styles.passwordWrapper}>
-            <input
-              type={showPass ? "text" : "password"}
-              placeholder="Password"
-              className={styles.input}
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-            />
+          <InputPassword setForm={setForm} form={form} type={PasswordType.PASSWORD} role={Roles.OWNER} />
 
-            <button
-              type="button"
-              className={styles.showButton}
-              onClick={() => setShowPass(!showPass)}
-            >
-              {showPass ? "Ocultar" : "Ver"}
-            </button>
-          </div>
-
-          {/* Confirm Password */}
-          <div className={styles.passwordWrapper}>
-            <input
-              type={showConfirmPass ? "text" : "password"}
-              placeholder="Repetir password"
-              className={styles.input}
-              value={form.confirmPassword}
-              onChange={(e) =>
-                setForm({ ...form, confirmPassword: e.target.value })
-              }
-            />
-
-            <button
-              type="button"
-              className={styles.showButton}
-              onClick={() => setShowConfirmPass(!showConfirmPass)}
-            >
-              {showConfirmPass ? "Ocultar" : "Ver"}
-            </button>
-          </div>
+          <InputPassword form={form} setForm={setForm} type={PasswordType.CONFIRM_PASSWORD} role={Roles.OWNER} />
 
           {errorMsg && <p className={styles.error}>{errorMsg}</p>}
 

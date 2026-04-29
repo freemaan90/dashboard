@@ -66,7 +66,6 @@ export const useUserForm = (
 
     // 👇 ESTO ES LO QUE FALTABA
     const text = await res.text();
-    console.log("RESPONSE BODY:", text);
 
     if (!res.ok) {
       try {
