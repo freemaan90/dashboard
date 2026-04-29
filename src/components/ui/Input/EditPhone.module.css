@@ -1,0 +1,27 @@
+.inlineRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* 👈 permite salto de línea */
+  gap: 8px;
+  align-items: center;
+}
+.value {
+  font-size: 16px;
+  font-weight: 500;
+}
+.btnSmall {
+  background: #333;
+  border: 1px solid #555;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+}
+.input {
+  background: #111;
+  border: 1px solid #333;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #fff;
+}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import styles from "./Sidebar.module.css";
-import LogoutButton from "../ui/LogoutButton/LogoutButton";
+import LogoutButton from "../ui/Button/LogoutButton";
 import { Session } from "next-auth";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -11,7 +11,7 @@ import { Roles } from "@/enum/Roles";
 export default function Sidebar({ session }: { session: Session | null }) {
   const pathname = usePathname();
   const { user } = session || {};
-  const { name, email, company = "", companyLogo = "", role = Roles.EMPLOYEE} = user || {};
+  const { company = "", companyLogo = "", role = Roles.EMPLOYEE } = user || {};
 
   return (
     <aside className={styles.sidebar}>
@@ -49,14 +49,23 @@ export default function Sidebar({ session }: { session: Session | null }) {
 
         {role !== Roles.EMPLOYEE && (
           <Link
-            href="/dashboard/account"
+            href="/dashboard/employee"
             className={
-              pathname.startsWith("/dashboard/account") ? styles.active : ""
+              pathname.startsWith("/dashboard/employee") ? styles.active : ""
             }
           >
-            Account
+            Empleados
           </Link>
         )}
+
+        <Link
+          href="/dashboard/account"
+          className={
+            pathname.startsWith("/dashboard/account") ? styles.active : ""
+          }
+        >
+          Perfil
+        </Link>
       </nav>
 
       <div className={styles.footer}>

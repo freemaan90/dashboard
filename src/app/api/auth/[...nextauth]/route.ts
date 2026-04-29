@@ -42,7 +42,7 @@ export const authOptions: NextAuthOptions = {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
-          credentials: "include"
+          credentials: "include",
         });
 
         if (!meRes.ok) return null;
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
           company: user.company,
           companyLogo: user.companyLogo,
           accessToken,
-          ownerId: user.ownerId
+          ownerId: user.ownerId,
         };
       },
     }),
@@ -71,7 +71,8 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+      // 1) Login inicial
       if (user) {
         token.id = user.id;
         token.name = user.name;
@@ -82,8 +83,18 @@ export const authOptions: NextAuthOptions = {
         token.accessToken = user.accessToken;
         token.company = user.company;
         token.companyLogo = user.companyLogo;
-        token.ownerId = user.ownerId
+        token.ownerId = user.ownerId;
       }
+
+      // 2) Cuando llamamos session.update() desde el cliente
+      if (trigger === "update" && session?.user) {
+        token.phone = session.user.phone;
+        token.name = session.user.name ?? token.name;
+        token.lastName = session.user.lastName ?? token.lastName;
+        token.company = session.user.company ?? token.company;
+        token.companyLogo = session.user.companyLogo ?? token.companyLogo;
+      }
+
       return token;
     },
 

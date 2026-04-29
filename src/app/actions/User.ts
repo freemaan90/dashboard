@@ -20,13 +20,12 @@ export async function registerAction(formData: UserInterface) {
 }
 
 export async function registerEmployeeAction(formData: UserInterface) {
-  
   const body = { ...formData, confirmPassword: undefined, role: undefined };
   const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/user/new-employee`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
-    credentials: "include", 
+    credentials: "include",
   });
 
   if (!res.ok) {
@@ -53,22 +52,28 @@ export async function handleDelete(id: number) {
   // await fetch(`${process.env.API_URL}/user/${id}`, { method: "DELETE" });
 }
 
-export async function getEmployees(ownerId: number):Promise<Employees[]> {
-  const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/user/employees/${ownerId}`, {
-    method: "GET",
-  });
-  if(!res.ok) {
+export async function getEmployees(ownerId: number): Promise<Employees[]> {
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_BACKEND_URL}/user/employees/${ownerId}`,
+    {
+      method: "GET",
+    },
+  );
+  if (!res.ok) {
     throw new Error("Error obteniendo empleados");
   }
   return res.json();
 }
 
 export async function startResetPasswordFlow(email: string) {
-  const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/request-password-reset`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email }),
-  });
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_BACKEND_URL}/auth/request-password-reset`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    },
+  );
 
   if (!res.ok) {
     throw new Error("Error iniciando el proceso de recuperación de contraseña");
@@ -78,23 +83,69 @@ export async function startResetPasswordFlow(email: string) {
 }
 
 export async function validateResetToken(token: string) {
-  const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/validate-reset-token?token=${token}`);
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_BACKEND_URL}/auth/validate-reset-token?token=${token}`,
+  );
   if (!res.ok) {
     throw new Error("Token inválido o expirado");
   }
   return res.json();
 }
 
-export async function resetPassword(token: string, newPassword: string, confirmPassword: string) {
-  const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/reset-password`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token, newPassword, confirmPassword }),
-  });
+export async function resetPassword(
+  token: string,
+  newPassword: string,
+  confirmPassword: string,
+) {
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_BACKEND_URL}/auth/reset-password`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, newPassword, confirmPassword }),
+    },
+  );
 
   if (!res.ok) {
     throw new Error("Error al actualizar la contraseña");
   }
 
   redirect("/login");
+}
+
+export async function updateClient({
+  userId,
+  field,
+  value,
+}: {
+  userId: string;
+  field: string;
+  value: string;
+}) {
+  const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ [field]: value }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Error al actualizar la contraseña");
+  }
+  return res.json();
+}
+
+export async function authMe(accessToken: string) {
+  // 3) Pedir el usuario usando el token como Bearer
+  const meRes = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/me`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    credentials: "include",
+  });
+
+  if (!meRes.ok) return null;
+
+  const user = await meRes.json();
+  return user
 }
