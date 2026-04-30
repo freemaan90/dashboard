@@ -1,7 +1,7 @@
 "use server";
 
 import { env } from "@/config/envs";
-import { Employees, UserInterface } from "@/interfaces/User.interface";
+import { Employees, UserInterface, UserSession } from "@/interfaces/User.interface";
 import { redirect } from "next/navigation";
 
 export async function registerAction(formData: UserInterface) {
@@ -134,7 +134,7 @@ export async function updateClient({
   return res.json();
 }
 
-export async function authMe(accessToken: string) {
+export async function authMe(accessToken: string):Promise<UserSession | null> {
   // 3) Pedir el usuario usando el token como Bearer
   const meRes = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/me`, {
     method: "GET",
@@ -146,7 +146,7 @@ export async function authMe(accessToken: string) {
 
   if (!meRes.ok) return null;
 
-  const user = await meRes.json();
+  const user:UserSession = await meRes.json();
   return user
 }
 export async function changePassword({

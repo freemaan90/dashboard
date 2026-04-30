@@ -1,0 +1,96 @@
+.container {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.form {
+  background: #0f0f0f;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: white;
+  font-size: 14px;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #4d4d4d;
+}
+
+.button {
+  padding: 10px 16px;
+  background: white;
+  color: black;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: fit-content;
+}
+
+.button:hover {
+  background: #e5e5e5;
+}
+
+.listTitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.empty {
+  color: #8a8a8a;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  background: #0f0f0f;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+}
+
+.itemTitle {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.itemContent {
+  color: #b5b5b5;
+  font-size: 14px;
+}
+
+.itemDate {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #6a6a6a;
+}

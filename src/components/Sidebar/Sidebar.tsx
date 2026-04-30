@@ -47,6 +47,15 @@ export default function Sidebar({ session }: { session: Session | null }) {
           WhatsApp
         </Link>
 
+        <Link
+          href="/dashboard/templates"
+          className={
+            pathname.startsWith("/dashboard/templates") ? styles.active : ""
+          }
+        >
+          Templates
+        </Link>
+
         {role !== Roles.EMPLOYEE && (
           <Link
             href="/dashboard/employee"
