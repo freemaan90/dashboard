@@ -6,5 +6,6 @@ export enum Roles {
 
 export enum PasswordType {
     PASSWORD = "password",
-    CONFIRM_PASSWORD = "confirmPassword"
+    CONFIRM_PASSWORD = "confirmPassword",
+    ACTUAL_PASSWORD = "actualPassword"
 }

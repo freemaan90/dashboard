@@ -149,3 +149,31 @@ export async function authMe(accessToken: string) {
   const user = await meRes.json();
   return user
 }
+export async function changePassword({
+  userId,
+  currentPassword,
+  newPassword,
+}: {
+  userId: string;
+  currentPassword: string;
+  newPassword: string;
+}) {
+  const res = await fetch(
+    `${env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/change-password`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    }
+  );
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => null);
+    return {
+      ok: false,
+      message: error?.message || "No se pudo actualizar la contraseña",
+    };
+  }
+
+  return { ok: true };
+}

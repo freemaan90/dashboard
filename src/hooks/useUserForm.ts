@@ -16,6 +16,7 @@ export const useUserForm = (
     email: "",
     password: "",
     confirmPassword: "",
+    actualPassword: "",
     role: initialRole,
     company: "",
     companyLogo: "",

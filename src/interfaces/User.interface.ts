@@ -9,6 +9,7 @@ export interface UserInterface {
   company: string;
   companyLogo: string;
   ownerId: string | null;
+  actualPassword?: string;
 }
 
 export interface Employees {

@@ -1,32 +1,43 @@
-import { useUserForm } from "@/hooks/useUserForm";
+"use client";
+
 import styles from "./InputPassword.module.css";
 import { PasswordType, Roles } from "../../../enum/Roles";
 import { UserInterface } from "@/interfaces/User.interface";
 import { Dispatch, SetStateAction } from "react";
+import { useUserForm } from "@/hooks/useUserForm";
+
 export const InputPassword = ({
   role,
   type,
   form,
-  setForm
+  setForm,
 }: {
   role: Roles.OWNER | Roles.EMPLOYEE;
-  type: PasswordType.PASSWORD | PasswordType.CONFIRM_PASSWORD;
-  form: UserInterface,
-  setForm: Dispatch<SetStateAction<UserInterface>>
+  type: PasswordType.PASSWORD | PasswordType.CONFIRM_PASSWORD | PasswordType.ACTUAL_PASSWORD;
+  form: UserInterface;
+  setForm: Dispatch<SetStateAction<UserInterface>>;
 }) => {
   const { showPass, setShowPass } = useUserForm(role);
-  
+
+  const placeholderMap = {
+    [PasswordType.ACTUAL_PASSWORD]: "Contraseña actual",
+    [PasswordType.PASSWORD]: "Nueva contraseña",
+    [PasswordType.CONFIRM_PASSWORD]: "Repetir contraseña",
+  };
+
   return (
     <div className={styles.passwordWrapper}>
       <input
         type={showPass ? "text" : "password"}
-        placeholder={type === PasswordType.PASSWORD ? "Nueva contraseña" : "Repetir contraseña"}
+        placeholder={placeholderMap[type]}
         className={styles.input}
-        value={form[type]}
-        onChange={(e) => {
-            console.log(form)
-            return setForm({ ...form, [type]: e.target.value });
-        }}
+        value={form[type] ?? ""}
+        onChange={(e) =>
+          setForm({
+            ...form,
+            [type]: e.target.value,
+          })
+        }
       />
 
       <button
