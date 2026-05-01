@@ -13,5 +13,9 @@ export default async function Account() {
 
   const user = session.accessToken && await authMe(session.accessToken)
 
+  if (!user) {
+    throw new Error("No se pudo obtener la información del usuario");
+  }
+
   return <AccountPage user={user} />;
 }

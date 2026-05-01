@@ -22,7 +22,7 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
-      setErrorMsg("Credenciales inválidas");
+      setErrorMsg("Credenciales inválidas. Verificá tu email y contraseña.");
       return;
     }
 
@@ -31,62 +31,125 @@ export default function LoginPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>Iniciar sesión</h1>
+      {/* Panel izquierdo — branding */}
+      <div className={styles.brandPanel} aria-hidden="true">
+        <div className={styles.brandLogo}>
+          <div className={styles.brandLogoIcon}>💬</div>
+          <span className={styles.brandLogoText}>WaSender</span>
+        </div>
 
-        <form onSubmit={handleLogin} className={styles.form}>
-          <div className={styles.emailWrapper}>
-            <input
-              type="email"
-              placeholder="Email"
-              className={styles.input}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+        <div className={styles.brandContent}>
+          <h1 className={styles.brandHeadline}>
+            Conectá tu empresa con WhatsApp
+          </h1>
+          <p className={styles.brandDescription}>
+            Gestioná sesiones, enviá mensajes y administrá templates desde un solo lugar.
+          </p>
+        </div>
+
+        <div className={styles.brandFeatures}>
+          <div className={styles.brandFeature}>
+            <span className={styles.brandFeatureDot} />
+            Sesiones WhatsApp en tiempo real
+          </div>
+          <div className={styles.brandFeature}>
+            <span className={styles.brandFeatureDot} />
+            Templates de mensajes reutilizables
+          </div>
+          <div className={styles.brandFeature}>
+            <span className={styles.brandFeatureDot} />
+            Gestión de equipos y roles
+          </div>
+        </div>
+      </div>
+
+      {/* Panel derecho — formulario */}
+      <div className={styles.formPanel}>
+        <div className={styles.card}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.title}>Bienvenido de vuelta</h2>
+            <p className={styles.subtitle}>Ingresá tus credenciales para continuar</p>
           </div>
 
-          <div className={styles.passwordWrapper}>
-            <input
-              type={showPass ? "text" : "password"}
-              placeholder="Password"
-              className={styles.input}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+          <form onSubmit={handleLogin} className={styles.form}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="email" className={styles.label}>Email</label>
+              <div className={styles.inputWrapper}>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="tu@empresa.com"
+                  className={styles.input}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
+                  required
+                />
+              </div>
+            </div>
 
-            <button
-              type="button"
-              className={styles.showButton}
-              onClick={() => setShowPass(!showPass)}
-            >
-              {showPass ? "Ocultar" : "Ver"}
+            <div className={styles.inputGroup}>
+              <label htmlFor="password" className={styles.label}>Contraseña</label>
+              <div className={`${styles.inputWrapper} ${styles.passwordWrapper}`}>
+                <input
+                  id="password"
+                  type={showPass ? "text" : "password"}
+                  placeholder="••••••••"
+                  className={styles.input}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                  required
+                  style={{ paddingRight: "80px" }}
+                />
+                <button
+                  type="button"
+                  className={styles.showButton}
+                  onClick={() => setShowPass(!showPass)}
+                  aria-label={showPass ? "Ocultar contraseña" : "Mostrar contraseña"}
+                >
+                  {showPass ? "Ocultar" : "Ver"}
+                </button>
+              </div>
+            </div>
+
+            <p className={styles.forgotText}>
+              ¿Olvidaste tu contraseña?{" "}
+              <span
+                className={styles.forgotLink}
+                onClick={() => router.push("/forgot-password")}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === "Enter" && router.push("/forgot-password")}
+              >
+                Recuperala acá
+              </span>
+            </p>
+
+            {errorMsg && (
+              <p className={styles.error} role="alert">
+                {errorMsg}
+              </p>
+            )}
+
+            <button type="submit" className={styles.button}>
+              Iniciar sesión
             </button>
-          </div>
+          </form>
 
-          <p className={styles.forgotText}>
-            ¿Olvidaste tu contraseña?{" "}
+          <p className={styles.registerText} style={{ marginTop: "var(--spacing-6)" }}>
+            ¿No tenés cuenta?{" "}
             <span
-              className={styles.forgotLink}
-              onClick={() => router.push("/forgot-password")}
+              className={styles.registerLink}
+              onClick={() => router.push("/signup")}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && router.push("/signup")}
             >
-              Recuperala acá
+              Registrate acá
             </span>
           </p>
-
-          {errorMsg && <p className={styles.error}>{errorMsg}</p>}
-
-          <button className={styles.button}>Entrar</button>
-        </form>
-
-        <p className={styles.registerText}>
-          ¿No tenés cuenta?{" "}
-          <span
-            className={styles.registerLink}
-            onClick={() => router.push("/signup")}
-          >
-            Registrate acá
-          </span>
-        </p>
+        </div>
       </div>
     </div>
   );

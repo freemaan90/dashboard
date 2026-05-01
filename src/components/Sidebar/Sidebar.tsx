@@ -7,77 +7,90 @@ import { Session } from "next-auth";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Roles } from "@/enum/Roles";
+import {
+  LayoutDashboard,
+  MessageSquare,
+  FileText,
+  Users,
+  User,
+} from "lucide-react";
+
+const navItems = [
+  { href: "/dashboard", label: "Inicio", icon: LayoutDashboard, exact: true },
+  { href: "/dashboard/whatsapp", label: "WhatsApp", icon: MessageSquare },
+  { href: "/dashboard/templates", label: "Templates", icon: FileText },
+  { href: "/dashboard/employee", label: "Empleados", icon: Users, ownerOnly: true },
+  { href: "/dashboard/account", label: "Perfil", icon: User },
+];
 
 export default function Sidebar({ session }: { session: Session | null }) {
   const pathname = usePathname();
   const { user } = session || {};
-  const { company = "", companyLogo = "", role = Roles.EMPLOYEE } = user || {};
+  const { company = "", companyLogo = "", role = Roles.EMPLOYEE, name = "" } = user || {};
+
+  const isActive = (href: string, exact?: boolean) =>
+    exact ? pathname === href : pathname.startsWith(href);
+
+  const initials = name
+    ? name.split(" ").map((n: string) => n[0]).slice(0, 2).join("").toUpperCase()
+    : "U";
 
   return (
     <aside className={styles.sidebar}>
+      {/* Header — logo y nombre de empresa */}
       <div className={styles.header}>
         <div className={styles.logoWrapper}>
-          <Image
-            src={companyLogo}
-            alt={company}
-            width={48}
-            height={48}
-            className={styles.logo}
-          />
+          {companyLogo ? (
+            <Image
+              src={companyLogo}
+              alt={company}
+              width={48}
+              height={48}
+              className={styles.logo}
+            />
+          ) : (
+            <span style={{ fontSize: "1.5rem" }}>🏢</span>
+          )}
         </div>
-        <h2 className={styles.title}>{company}</h2>
+        <h2 className={styles.title}>{company || "Mi Empresa"}</h2>
       </div>
 
       <div className={styles.separator} />
 
-      <nav className={styles.nav}>
-        <Link
-          href="/dashboard"
-          className={pathname === "/dashboard" ? styles.active : ""}
-        >
-          Inicio
-        </Link>
+      {/* Navegación */}
+      <nav className={styles.nav} aria-label="Navegación principal">
+        <p className={styles.navLabel}>Menú</p>
 
-        <Link
-          href="/dashboard/whatsapp"
-          className={
-            pathname.startsWith("/dashboard/whatsapp") ? styles.active : ""
-          }
-        >
-          WhatsApp
-        </Link>
-
-        <Link
-          href="/dashboard/templates"
-          className={
-            pathname.startsWith("/dashboard/templates") ? styles.active : ""
-          }
-        >
-          Templates
-        </Link>
-
-        {role !== Roles.EMPLOYEE && (
-          <Link
-            href="/dashboard/employee"
-            className={
-              pathname.startsWith("/dashboard/employee") ? styles.active : ""
-            }
-          >
-            Empleados
-          </Link>
-        )}
-
-        <Link
-          href="/dashboard/account"
-          className={
-            pathname.startsWith("/dashboard/account") ? styles.active : ""
-          }
-        >
-          Perfil
-        </Link>
+        {navItems.map(({ href, label, icon: Icon, exact, ownerOnly }) => {
+          if (ownerOnly && role === Roles.EMPLOYEE) return null;
+          const active = isActive(href, exact);
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`${styles.navItem} ${active ? styles.active : ""}`}
+              aria-current={active ? "page" : undefined}
+            >
+              <span className={styles.navIcon}>
+                <Icon size={18} aria-hidden="true" />
+              </span>
+              {label}
+            </Link>
+          );
+        })}
       </nav>
 
+      {/* Footer — info de usuario y logout */}
       <div className={styles.footer}>
+        <div className={styles.userInfo}>
+          <div className={styles.userAvatar} aria-hidden="true">
+            {initials}
+          </div>
+          <div style={{ overflow: "hidden" }}>
+            <p className={styles.userName}>{name || "Usuario"}</p>
+            <p className={styles.userRole}>{role}</p>
+          </div>
+        </div>
         <LogoutButton />
       </div>
     </aside>

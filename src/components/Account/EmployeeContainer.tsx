@@ -22,8 +22,12 @@ export const EmployeeContainer = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Empleados</h1>
-
+        <div className={styles.headerText}>
+          <h1 className={styles.title}>Empleados</h1>
+          <p className={styles.subtitle}>
+            Gestioná los miembros de tu equipo y sus roles
+          </p>
+        </div>
         <ButtonAddEmployee setShowForm={setShowForm} />
       </div>
 

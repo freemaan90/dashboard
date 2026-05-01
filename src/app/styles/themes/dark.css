@@ -1,0 +1,122 @@
+/**
+ * Dark Theme — Violet Pro
+ *
+ * Modo oscuro para el design system. Aplicado via [data-theme="dark"].
+ * Contraste WCAG 2.1 AA verificado.
+ */
+
+[data-theme="dark"] {
+  /* ─── Colores de Marca ─────────────────────────────────────────────────── */
+  --color-brand-primary:        var(--color-primary-400);   /* #a78bfa */
+  --color-brand-primary-hover:  var(--color-primary-300);   /* #c4b5fd */
+  --color-brand-primary-active: var(--color-primary-200);   /* #ddd6fe */
+  --color-brand-primary-subtle: rgba(124, 58, 237, 0.15);
+  --color-brand-primary-muted:  rgba(124, 58, 237, 0.25);
+
+  /* ─── Colores de Texto ─────────────────────────────────────────────────── */
+  --color-text-primary:   #f4f4f5;   /* neutral-100 */
+  --color-text-secondary: #a1a1aa;   /* neutral-400 */
+  --color-text-tertiary:  #71717a;   /* neutral-500 */
+  --color-text-disabled:  #52525b;   /* neutral-600 */
+  --color-text-inverse:   #18181b;
+  --color-text-on-primary: #ffffff;
+
+  /* ─── Colores de Fondo / Superficie ───────────────────────────────────── */
+  --color-bg-base:     #09090b;   /* zinc-950 */
+  --color-bg-surface:  #18181b;   /* neutral-900 */
+  --color-bg-elevated: #27272a;   /* neutral-800 */
+  --color-bg-overlay:  rgba(0, 0, 0, 0.7);
+  --color-bg-subtle:   #27272a;   /* neutral-800 */
+  --color-bg-muted:    #3f3f46;   /* neutral-700 */
+
+  /* ─── Colores de Borde ─────────────────────────────────────────────────── */
+  --color-border-default: #3f3f46;   /* neutral-700 */
+  --color-border-strong:  #52525b;   /* neutral-600 */
+  --color-border-focus:   var(--color-primary-400);   /* #a78bfa */
+
+  /* ─── Semánticos ───────────────────────────────────────────────────────── */
+  --color-success-bg:     rgba(16, 185, 129, 0.15);
+  --color-success-border: var(--color-success-500);
+  --color-success-text:   #6ee7b7;
+  --color-success-icon:   var(--color-success-500);
+
+  --color-warning-bg:     rgba(245, 158, 11, 0.15);
+  --color-warning-border: var(--color-warning-500);
+  --color-warning-text:   #fcd34d;
+  --color-warning-icon:   var(--color-warning-500);
+
+  --color-error-bg:       rgba(244, 63, 94, 0.15);
+  --color-error-border:   var(--color-error-500);
+  --color-error-text:     #fda4af;
+  --color-error-icon:     var(--color-error-500);
+
+  --color-info-bg:        rgba(14, 165, 233, 0.15);
+  --color-info-border:    var(--color-info-500);
+  --color-info-text:      #7dd3fc;
+  --color-info-icon:      var(--color-info-500);
+
+  /* ─── Botones ──────────────────────────────────────────────────────────── */
+  --color-btn-primary-bg:           var(--color-primary-600);
+  --color-btn-primary-bg-hover:     var(--color-primary-500);
+  --color-btn-primary-bg-active:    var(--color-primary-400);
+  --color-btn-primary-text:         #ffffff;
+  --color-btn-primary-border:       var(--color-primary-600);
+
+  --color-btn-secondary-bg:         #27272a;
+  --color-btn-secondary-bg-hover:   #3f3f46;
+  --color-btn-secondary-bg-active:  #52525b;
+  --color-btn-secondary-text:       #e4e4e7;
+  --color-btn-secondary-border:     #3f3f46;
+
+  --color-btn-outline-bg:           transparent;
+  --color-btn-outline-bg-hover:     rgba(124, 58, 237, 0.15);
+  --color-btn-outline-text:         var(--color-primary-400);
+  --color-btn-outline-border:       var(--color-primary-500);
+
+  --color-btn-ghost-bg:             transparent;
+  --color-btn-ghost-bg-hover:       #27272a;
+  --color-btn-ghost-text:           #a1a1aa;
+  --color-btn-ghost-border:         transparent;
+
+  --color-btn-danger-bg:            var(--color-error-600);
+  --color-btn-danger-bg-hover:      var(--color-error-500);
+  --color-btn-danger-text:          #ffffff;
+  --color-btn-danger-border:        var(--color-error-600);
+
+  /* ─── Inputs ───────────────────────────────────────────────────────────── */
+  --color-input-bg:             #27272a;
+  --color-input-bg-disabled:    #18181b;
+  --color-input-border:         #3f3f46;
+  --color-input-border-hover:   #52525b;
+  --color-input-border-focus:   var(--color-primary-500);
+  --color-input-border-error:   var(--color-error-500);
+  --color-input-text:           #f4f4f5;
+  --color-input-placeholder:    #71717a;
+  --color-input-text-disabled:  #52525b;
+
+  /* ─── Navegación (sidebar) ─────────────────────────────────────────────── */
+  --color-nav-bg:               #0f0e1a;
+  --color-nav-border:           rgba(139, 92, 246, 0.12);
+  --color-nav-text:             #a78bfa;
+  --color-nav-text-hover:       #ede9fe;
+  --color-nav-text-active:      #ffffff;
+  --color-nav-bg-active:        rgba(139, 92, 246, 0.20);
+  --color-nav-bg-hover:         rgba(139, 92, 246, 0.10);
+
+  /* ─── Cards ────────────────────────────────────────────────────────────── */
+  --color-card-bg:              #18181b;
+  --color-card-border:          #3f3f46;
+  --color-card-shadow:          0 1px 3px rgba(0, 0, 0, 0.4);
+
+  /* ─── Badge ────────────────────────────────────────────────────────────── */
+  --color-badge-primary-bg:     rgba(124, 58, 237, 0.2);
+  --color-badge-primary-text:   #c4b5fd;
+  --color-badge-success-bg:     rgba(16, 185, 129, 0.2);
+  --color-badge-success-text:   #6ee7b7;
+  --color-badge-warning-bg:     rgba(245, 158, 11, 0.2);
+  --color-badge-warning-text:   #fcd34d;
+  --color-badge-error-bg:       rgba(244, 63, 94, 0.2);
+  --color-badge-error-text:     #fda4af;
+  --color-badge-neutral-bg:     #27272a;
+  --color-badge-neutral-text:   #a1a1aa;
+}

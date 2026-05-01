@@ -18,8 +18,9 @@
 @import './styles/tokens/borders.css';
 @import './styles/tokens/animations.css';
 
-/* ─── 2. Tema Claro (predeterminado) ────────────────────────────────────── */
+/* ─── 2. Temas ──────────────────────────────────────────────────────────── */
 @import './styles/themes/light.css';
+@import './styles/themes/dark.css';
 
 /* ─── 3. Estilos Base y Reset ───────────────────────────────────────────── */
 @import './styles/base.css';

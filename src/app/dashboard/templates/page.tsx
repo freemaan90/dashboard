@@ -14,7 +14,7 @@ export default async function TemplatePage() {
 
   const user = await authMe(session.accessToken);
 
-  if(!user) {
+  if (!user) {
     throw new Error("No se pudo obtener la información del usuario");
   }
 
@@ -26,71 +26,99 @@ export default async function TemplatePage() {
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
 
-    if(!session?.accessToken) {
+    if (!session?.accessToken) {
       throw new Error("No hay sesión activa");
     }
 
     const user = await authMe(session.accessToken);
 
-    if(!user) {
+    if (!user) {
       throw new Error("No se pudo obtener la información del usuario");
-    }   
+    }
 
-    await createTemplate(session.accessToken!, { title, content, userId: String(user.id )});
+    await createTemplate(session.accessToken!, {
+      title,
+      content,
+      userId: String(user.id),
+    });
 
     revalidatePath("/dashboard/templates");
   }
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Templates de {user.company}</h1>
+      {/* Header */}
+      <div className={styles.header}>
+        <h1 className={styles.title}>Templates</h1>
+        <p className={styles.subtitle}>
+          Creá y reutilizá plantillas de mensajes para {user.company}
+        </p>
+      </div>
 
-      {/* FORM */}
+      {/* Formulario */}
       <form action={handleCreate} className={styles.form}>
+        <h2 className={styles.formTitle}>Nuevo template</h2>
+
         <div>
-          <label className={styles.label}>Título</label>
+          <label htmlFor="title" className={styles.label}>Título</label>
           <input
+            id="title"
             name="title"
             required
             className={styles.input}
-            placeholder="Título del template"
+            placeholder="Ej: Bienvenida al cliente"
           />
         </div>
 
         <div>
-          <label className={styles.label}>Contenido</label>
+          <label htmlFor="content" className={styles.label}>Contenido</label>
           <textarea
+            id="content"
             name="content"
             required
             className={styles.textarea}
-            placeholder="Contenido del template"
+            placeholder="Hola {nombre}, te damos la bienvenida a..."
           />
         </div>
 
         <button type="submit" className={styles.button}>
-          Crear Template
+          Crear template
         </button>
       </form>
 
-      {/* LISTA */}
-      <div>
-        <h2 className={styles.listTitle}>Tus templates</h2>
+      {/* Lista */}
+      <div className={styles.listSection}>
+        <h2 className={styles.listTitle}>
+          Tus templates
+          {templates.length > 0 && (
+            <span style={{
+              marginLeft: "var(--spacing-2)",
+              fontSize: "var(--font-size-small)",
+              fontWeight: "var(--font-weight-regular)",
+              color: "var(--color-text-tertiary)",
+            }}>
+              ({templates.length})
+            </span>
+          )}
+        </h2>
 
-        {templates.length === 0 && (
-          <p className={styles.empty}>No tenés templates todavía.</p>
+        {templates.length === 0 ? (
+          <p className={styles.empty}>
+            No tenés templates todavía. ¡Creá el primero!
+          </p>
+        ) : (
+          <ul className={styles.list}>
+            {templates.map((t: any) => (
+              <li key={t.id} className={styles.item}>
+                <h3 className={styles.itemTitle}>{t.title}</h3>
+                <p className={styles.itemContent}>{t.content}</p>
+                <p className={styles.itemDate}>
+                  Creado: {new Date(t.createdAt).toLocaleString("es-AR")}
+                </p>
+              </li>
+            ))}
+          </ul>
         )}
-
-        <ul className={styles.list}>
-          {templates.map((t: any) => (
-            <li key={t.id} className={styles.item}>
-              <h3 className={styles.itemTitle}>{t.title}</h3>
-              <p className={styles.itemContent}>{t.content}</p>
-              <p className={styles.itemDate}>
-                Creado: {new Date(t.createdAt).toLocaleString()}
-              </p>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );

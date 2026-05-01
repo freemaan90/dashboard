@@ -48,7 +48,7 @@
 /* Focus-within — cuando el input interno tiene foco */
 .wrapper:focus-within:not(.wrapper--disabled) {
   border-color: var(--color-input-border-focus);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  box-shadow: var(--shadow-brand, 0 0 0 3px rgba(124, 58, 237, 0.15));
   outline: none;
 }
 
@@ -59,7 +59,7 @@
 
 .wrapper--error:focus-within {
   border-color: var(--color-input-border-error);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  box-shadow: var(--shadow-error, 0 0 0 3px rgba(244, 63, 94, 0.15));
 }
 
 /* Estado disabled */

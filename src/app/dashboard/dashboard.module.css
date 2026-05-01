@@ -1,11 +1,31 @@
 .container {
   display: flex;
-  height: 100vh; /* mantiene el layout fijo */
-  overflow: hidden; /* evita scroll global */
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-bg-base);
 }
 
 .main {
   flex: 1;
-  padding: 30px;
-  overflow-y: auto; /* scroll solo acá */
+  padding: var(--spacing-8);
+  overflow-y: auto;
+  background: var(--color-bg-base);
+}
+
+/* Page header pattern */
+.pageHeader {
+  margin-bottom: var(--spacing-8);
+}
+
+.pageTitle {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.pageSubtitle {
+  margin-top: var(--spacing-1);
+  font-size: var(--font-size-body);
+  color: var(--color-text-tertiary);
 }

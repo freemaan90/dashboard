@@ -1,32 +1,51 @@
 .sidebar {
-  width: 240px;
+  width: 256px;
+  min-width: 256px;
   height: 100vh;
-  background: #141414;
-  color: #fff;
-  padding: 24px;
+  background: var(--color-sidebar-bg, #1e1b4b);
+  color: var(--color-sidebar-text, #c4b5fd);
+  padding: var(--spacing-6);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid var(--color-sidebar-border, rgba(139, 92, 246, 0.15));
+  position: relative;
 }
+
+/* Gradiente sutil en la parte superior */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.12) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────── */
 
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-3);
+  position: relative;
+  z-index: 1;
 }
 
 .logoWrapper {
   width: 56px;
   height: 56px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl, 16px);
   overflow: hidden;
-  background: #222;
+  background: rgba(139, 92, 246, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.08);
 }
 
 .logo {
@@ -34,45 +53,143 @@
 }
 
 .title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
   text-align: center;
+  letter-spacing: var(--letter-spacing-tight);
 }
 
+/* ─── Separator ─────────────────────────────────────────────────────────── */
+
 .separator {
-  margin: 24px 0;
+  margin: var(--spacing-6) 0 var(--spacing-4);
   height: 1px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--color-sidebar-border, rgba(139, 92, 246, 0.15));
 }
+
+/* ─── Nav label ─────────────────────────────────────────────────────────── */
+
+.navLabel {
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-widest, 0.1em);
+  text-transform: uppercase;
+  color: rgba(196, 181, 253, 0.5);
+  padding: 0 var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+}
+
+/* ─── Nav ───────────────────────────────────────────────────────────────── */
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-1);
+  flex: 1;
 }
 
-.nav a {
-  color: #cfcfcf;
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  color: var(--color-sidebar-text, #c4b5fd);
   text-decoration: none;
-  font-size: 15px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  transition: background 0.2s ease, color 0.2s ease;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--duration-fast) var(--easing-in-out),
+    color var(--duration-fast) var(--easing-in-out);
 }
 
-.nav a:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+.navItem:hover {
+  background: var(--color-sidebar-bg-hover, rgba(139, 92, 246, 0.12));
+  color: var(--color-sidebar-text-hover, #ede9fe);
 }
 
-.active {
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff !important;
-  font-weight: 500;
+.navItem:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
 }
+
+.navItem.active {
+  background: var(--color-sidebar-bg-active, rgba(139, 92, 246, 0.20));
+  color: var(--color-sidebar-text-active, #ffffff);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Indicador activo — barra izquierda */
+.navItem.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 3px;
+  height: 28px;
+  background: var(--color-primary-400, #a78bfa);
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.navItem.active .navIcon,
+.navItem:hover .navIcon {
+  opacity: 1;
+}
+
+/* ─── Footer ────────────────────────────────────────────────────────────── */
 
 .footer {
   margin-top: auto;
-  padding-top: 20px;
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-sidebar-border, rgba(139, 92, 246, 0.15));
+}
+
+/* ─── User info en footer ───────────────────────────────────────────────── */
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-2);
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: rgba(139, 92, 246, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: #c4b5fd;
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: #e4e4e7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userRole {
+  font-size: var(--font-size-xs, 0.75rem);
+  color: rgba(196, 181, 253, 0.6);
 }

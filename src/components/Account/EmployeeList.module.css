@@ -1,48 +1,110 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
 
 .card {
-  background: white;
-  padding: 18px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  background: var(--color-bg-surface);
+  padding: var(--spacing-4) var(--spacing-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-default);
+  box-shadow: var(--shadow-sm);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--spacing-4);
+  transition:
+    box-shadow var(--duration-fast) var(--easing-in-out),
+    border-color var(--duration-fast) var(--easing-in-out);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-200);
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
 }
 
 .name {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 
 .role {
-  font-size: 14px;
-  color: #666;
+  font-size: var(--font-size-small);
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-3);
 }
 
 .select {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  font-family: var(--font-family-sans);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--easing-in-out);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-brand);
 }
 
 .deleteButton {
-  background: #ff4d4d;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-3);
+  background: var(--color-error-bg, #fff1f2);
+  color: var(--color-error-text, #be123c);
+  border: 1px solid var(--color-error-border, #f43f5e);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-sans);
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.2s ease;
+  transition:
+    background-color var(--duration-fast) var(--easing-in-out),
+    color var(--duration-fast) var(--easing-in-out);
 }
 
 .deleteButton:hover {
-  background: #e60000;
+  background: var(--color-error-600, #e11d48);
+  color: #ffffff;
+  border-color: var(--color-error-600);
+}
+
+.deleteButton:focus-visible {
+  outline: 2px solid var(--color-error-500);
+  outline-offset: 2px;
 }

@@ -1,47 +1,80 @@
 .wrapper {
-  padding: 32px;
-  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  max-width: 720px;
 }
 
-.titleRow{
+/* ─── Header ────────────────────────────────────────────────────────────── */
+
+.titleRow {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 24px;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-tight);
 }
+
+.subtitle {
+  font-size: var(--font-size-body);
+  color: var(--color-text-tertiary);
+}
+
+/* ─── Profile card ──────────────────────────────────────────────────────── */
 
 .card {
-  background: #111;
-  border: 1px solid #222;
-  border-radius: 12px;
-  padding: 24px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
-.header {
+/* Banner superior con gradiente de marca */
+.cardBanner {
+  height: 80px;
+  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-accent-600, #4f46e5) 100%);
+  position: relative;
+  opacity: 0.2;
+}
+
+/* ─── Header del card (avatar + nombre) ────────────────────────────────── */
+
+.cardHeader {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
+  align-items: flex-end;
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-6) var(--spacing-4);
+  margin-top: -32px;
 }
 
 .avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #222;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  font-weight: 600;
-  color: #888;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
   overflow: hidden;
+  border: 3px solid var(--color-bg-surface);
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
 }
 
 .avatar img {
@@ -50,39 +83,98 @@
   object-fit: cover;
 }
 
-.name {
-  font-size: 22px;
-  font-weight: 600;
+.avatarInfo {
+  padding-bottom: var(--spacing-1);
 }
 
-.role {
-  font-size: 14px;
-  color: #888;
+.name {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--spacing-1);
+  padding: 2px var(--spacing-2);
+  background: var(--color-badge-primary-bg, var(--color-primary-100));
+  color: var(--color-badge-primary-text, var(--color-primary-700));
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+/* ─── Info grid ─────────────────────────────────────────────────────────── */
+
+.divider {
+  height: 1px;
+  background: var(--color-border-default);
+  margin: 0 var(--spacing-6);
 }
 
 .infoGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-1);
+  padding: var(--spacing-4) var(--spacing-6) var(--spacing-6);
 }
 
 .infoItem {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 12px;
-  background: #181818;
-  border-radius: 8px;
-  border: 1px solid #222;
+  gap: var(--spacing-1);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+  transition: background-color var(--duration-fast) var(--easing-in-out);
+}
+
+.infoItem:hover {
+  background: var(--color-bg-subtle);
 }
 
 .label {
-  font-size: 12px;
-  color: #777;
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-tertiary);
   text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider, 0.05em);
 }
 
 .value {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+/* ─── Sección de seguridad ──────────────────────────────────────────────── */
+
+.section {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-6);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.sectionDescription {
+  font-size: var(--font-size-small);
+  color: var(--color-text-tertiary);
+  margin-top: var(--spacing-1);
 }

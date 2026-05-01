@@ -1,58 +1,84 @@
 /**
- * Color Tokens
- * 
- * Sistema de tokens de colores para el Dashboard WhatsApp Sender
- * Define la paleta completa de colores incluyendo:
- * - Colores primarios (azul) con 10 variaciones (50-900)
- * - Colores neutrales (grises) con 10 variaciones
- * - Colores semánticos (success, warning, error, info) con variaciones
- * 
- * Requisitos: 1.1, 1.2, 2.3
+ * Color Tokens — Violet Pro Design System
+ *
+ * Paleta de colores para el SaaS Dashboard.
+ * Primary: Violet (#7c3aed) — moderno, premium, innovación
+ * Accent:  Indigo (#4f46e5) — complementario
+ * Neutrales: Zinc (grises cálidos, más modernos que grises puros)
+ * Semánticos: Emerald (success), Amber (warning), Rose (error), Sky (info)
  */
 
 :root {
-  /* Primary Colors - Azul profesional */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-primary-800: #1e40af;
-  --color-primary-900: #1e3a8a;
+  /* ─── Primary — Violet ──────────────────────────────────────────────────── */
+  --color-primary-50:  #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
 
-  /* Neutral Colors - Grises */
-  --color-neutral-50: #f9fafb;
-  --color-neutral-100: #f3f4f6;
-  --color-neutral-200: #e5e7eb;
-  --color-neutral-300: #d1d5db;
-  --color-neutral-400: #9ca3af;
-  --color-neutral-500: #6b7280;
-  --color-neutral-600: #4b5563;
-  --color-neutral-700: #374151;
-  --color-neutral-800: #1f2937;
-  --color-neutral-900: #111827;
+  /* ─── Accent — Indigo ───────────────────────────────────────────────────── */
+  --color-accent-50:  #eef2ff;
+  --color-accent-100: #e0e7ff;
+  --color-accent-200: #c7d2fe;
+  --color-accent-300: #a5b4fc;
+  --color-accent-400: #818cf8;
+  --color-accent-500: #6366f1;
+  --color-accent-600: #4f46e5;
+  --color-accent-700: #4338ca;
+  --color-accent-800: #3730a3;
+  --color-accent-900: #312e81;
 
-  /* Semantic Colors - Success */
-  --color-success-50: #f0fdf4;
-  --color-success-500: #22c55e;
-  --color-success-700: #15803d;
-  
-  /* Semantic Colors - Warning */
-  --color-warning-50: #fffbeb;
+  /* ─── Neutral — Zinc (grises cálidos) ───────────────────────────────────── */
+  --color-neutral-50:  #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-300: #d4d4d8;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #71717a;
+  --color-neutral-600: #52525b;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-800: #27272a;
+  --color-neutral-900: #18181b;
+
+  /* ─── Sidebar Dark — Violet Dark ────────────────────────────────────────── */
+  --color-sidebar-bg:        #1e1b4b;   /* indigo-950 */
+  --color-sidebar-bg-hover:  rgba(139, 92, 246, 0.12);
+  --color-sidebar-bg-active: rgba(139, 92, 246, 0.20);
+  --color-sidebar-border:    rgba(139, 92, 246, 0.15);
+  --color-sidebar-text:      #c4b5fd;   /* primary-300 */
+  --color-sidebar-text-hover: #ede9fe;  /* primary-100 */
+  --color-sidebar-text-active: #ffffff;
+
+  /* ─── Semantic — Emerald (Success) ─────────────────────────────────────── */
+  --color-success-50:  #ecfdf5;
+  --color-success-100: #d1fae5;
+  --color-success-500: #10b981;
+  --color-success-600: #059669;
+  --color-success-700: #047857;
+
+  /* ─── Semantic — Amber (Warning) ───────────────────────────────────────── */
+  --color-warning-50:  #fffbeb;
+  --color-warning-100: #fef3c7;
   --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
   --color-warning-700: #b45309;
-  
-  /* Semantic Colors - Error */
-  --color-error-50: #fef2f2;
-  --color-error-500: #ef4444;
-  --color-error-600: #dc2626;
-  --color-error-700: #b91c1c;
-  
-  /* Semantic Colors - Info */
-  --color-info-50: #eff6ff;
-  --color-info-500: #3b82f6;
-  --color-info-700: #1d4ed8;
+
+  /* ─── Semantic — Rose (Error) ───────────────────────────────────────────── */
+  --color-error-50:  #fff1f2;
+  --color-error-100: #ffe4e6;
+  --color-error-500: #f43f5e;
+  --color-error-600: #e11d48;
+  --color-error-700: #be123c;
+
+  /* ─── Semantic — Sky (Info) ─────────────────────────────────────────────── */
+  --color-info-50:  #f0f9ff;
+  --color-info-100: #e0f2fe;
+  --color-info-500: #0ea5e9;
+  --color-info-600: #0284c7;
+  --color-info-700: #0369a1;
 }

@@ -1,157 +1,327 @@
+/* ─── Login Page — Violet Pro ───────────────────────────────────────────── */
+
 .container {
   display: flex;
-  justify-content: center;
+  min-height: 100vh;
+  background: var(--color-bg-base, #fafafa);
+}
+
+/* Panel izquierdo — decorativo */
+.brandPanel {
+  display: none;
+  flex: 1;
+  background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #7c3aed 100%);
+  padding: var(--spacing-12);
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .brandPanel {
+    display: flex;
+  }
+}
+
+.brandPanel::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.2);
+  pointer-events: none;
+}
+
+.brandPanel::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: rgba(79, 70, 229, 0.15);
+  pointer-events: none;
+}
+
+.brandLogo {
+  display: flex;
   align-items: center;
-  height: 100vh;
-  background: #f4f4f4;
+  gap: var(--spacing-3);
+  position: relative;
+  z-index: 1;
+}
+
+.brandLogoIcon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.brandLogoText {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+}
+
+.brandContent {
+  position: relative;
+  z-index: 1;
+}
+
+.brandHeadline {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: var(--spacing-4);
+}
+
+.brandDescription {
+  font-size: var(--font-size-body);
+  color: rgba(196, 181, 253, 0.9);
+  line-height: var(--line-height-relaxed);
+  max-width: 380px;
+}
+
+.brandFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  position: relative;
+  z-index: 1;
+}
+
+.brandFeature {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  color: rgba(196, 181, 253, 0.8);
+  font-size: var(--font-size-small);
+}
+
+.brandFeatureDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-400, #a78bfa);
+  flex-shrink: 0;
+}
+
+/* Panel derecho — formulario */
+.formPanel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8) var(--spacing-6);
 }
 
 .card {
-  background: white;
-  padding: 32px;
-  border-radius: 12px;
-  width: 360px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.cardHeader {
+  margin-bottom: var(--spacing-8);
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  text-align: center;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: var(--spacing-2);
+}
+
+.subtitle {
+  font-size: var(--font-size-body);
+  color: var(--color-text-tertiary);
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-4);
 }
 
-.input {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
-  width: 100%;
+/* Inputs nativos (mientras no se migra al componente Input) */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
 }
 
-.input:focus {
-  outline: none;
-  border-color: #555;
+.label {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
 }
 
-.passwordWrapper, .emailWrapper {
+.inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
-}
-.passwordWrapper .input {
-  width: 100%;
-  padding-right: 48px;
+  background: var(--color-input-bg, #ffffff);
+  border: 1px solid var(--color-input-border, #d4d4d8);
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--duration-fast) var(--easing-in-out),
+    box-shadow var(--duration-fast) var(--easing-in-out);
 }
 
+.inputWrapper:focus-within {
+  border-color: var(--color-primary-500, #8b5cf6);
+  box-shadow: var(--shadow-brand, 0 0 0 3px rgba(124, 58, 237, 0.15));
+}
+
+.input {
+  flex: 1;
+  padding: var(--spacing-3) var(--spacing-3);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: var(--font-size-body);
+  color: var(--color-input-text, #18181b);
+  font-family: var(--font-family-sans);
+}
+
+.input::placeholder {
+  color: var(--color-input-placeholder, #71717a);
+}
+
+.passwordWrapper {
+  position: relative;
+}
 
 .showButton {
   position: absolute;
-  right: 10px;
+  right: var(--spacing-3);
   background: transparent;
   border: none;
-  color: #333;
+  color: var(--color-text-tertiary);
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast) var(--easing-in-out);
 }
 
 .showButton:hover {
-  color: black;
+  color: var(--color-text-primary);
 }
 
 .button {
-  padding: 12px;
-  background: #1e1e1e;
-  color: white;
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-primary-600, #7c3aed);
+  color: #ffffff;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-in-out),
+    transform var(--duration-fast) var(--easing-in-out),
+    box-shadow var(--duration-fast) var(--easing-in-out);
+  font-family: var(--font-family-sans);
 }
 
 .button:hover {
-  background: #000;
+  background: var(--color-primary-700, #6d28d9);
+  box-shadow: var(--shadow-brand-lg, 0 8px 24px rgba(124, 58, 237, 0.25));
+}
+
+.button:active {
+  transform: scale(0.99);
+  background: var(--color-primary-800, #5b21b6);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  color: var(--color-text-disabled);
+  font-size: var(--font-size-small);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-default);
 }
 
 .error {
-  color: #d33;
-  font-size: 14px;
-  text-align: center;
-}
-
-.registerText {
-  margin-top: 16px;
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-}
-
-.registerLink {
-  color: #1e1e1e;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.registerLink:hover {
-  text-decoration: underline;
-}
-
-.forgetPassword{
   display: flex;
-  flex-direction: column;
-  justify-content:center;
-  align-items:center;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3);
+  background: var(--color-error-bg, #fff1f2);
+  border: 1px solid var(--color-error-border, #f43f5e);
+  border-radius: var(--radius-md);
+  color: var(--color-error-text, #be123c);
+  font-size: var(--font-size-small);
 }
-.forgotText {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin-top: -4px; /* queda más pegado al input */
-}
-
-.forgotLink {
-  color: #1e1e1e;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.forgotLink:hover {
-  text-decoration: underline;
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 14px; /* antes 16px, queda más compacto */
-}
-
-
-/* Reset */
 
 .success {
-  color: #0a7a0a;
-  font-size: 14px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3);
+  background: var(--color-success-bg, #ecfdf5);
+  border: 1px solid var(--color-success-border, #10b981);
+  border-radius: var(--radius-md);
+  color: var(--color-success-text, #047857);
+  font-size: var(--font-size-small);
 }
 
+.forgotText,
+.registerText,
 .backText {
-  margin-top: 16px;
   text-align: center;
-  font-size: 14px;
-  color: #555;
+  font-size: var(--font-size-small);
+  color: var(--color-text-tertiary);
 }
 
+.forgotLink,
+.registerLink,
 .backLink {
-  color: #1e1e1e;
-  font-weight: 600;
+  color: var(--color-primary-600, #7c3aed);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--easing-in-out);
 }
 
+.forgotLink:hover,
+.registerLink:hover,
 .backLink:hover {
+  color: var(--color-primary-700, #6d28d9);
   text-decoration: underline;
+}
+
+/* Legacy compat */
+.emailWrapper,
+.forgetPassword {
+  display: flex;
+  flex-direction: column;
 }
