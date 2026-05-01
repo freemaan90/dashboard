@@ -49,7 +49,7 @@ export default function Sidebar({ session }: { session: Session | null }) {
               className={styles.logo}
             />
           ) : (
-            <span style={{ fontSize: "1.5rem" }}>🏢</span>
+            <span className={styles.icon}>🏢</span>
           )}
         </div>
         <h2 className={styles.title}>{company || "Mi Empresa"}</h2>
@@ -86,7 +86,7 @@ export default function Sidebar({ session }: { session: Session | null }) {
           <div className={styles.userAvatar} aria-hidden="true">
             {initials}
           </div>
-          <div style={{ overflow: "hidden" }}>
+          <div className={styles.userDetails}>
             <p className={styles.userName}>{name || "Usuario"}</p>
             <p className={styles.userRole}>{role}</p>
           </div>

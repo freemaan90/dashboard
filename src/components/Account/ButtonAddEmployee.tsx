@@ -12,7 +12,7 @@ export const ButtonAddEmployee = ({
   };
 
   return (
-    <button className={styles.addButton} onClick={handleAddEmployee}>
+    <button className={styles.button} onClick={handleAddEmployee}>
       + Agregar empleado
     </button>
   );

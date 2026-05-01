@@ -180,3 +180,9 @@
   font-size: var(--font-size-xs, 0.75rem);
   color: var(--color-text-disabled);
 }
+.templateCount {
+  margin-left: var(--spacing-2);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-tertiary);
+}

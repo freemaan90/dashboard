@@ -353,7 +353,7 @@ export default function SessionPanel({ onSessionCreated }: SessionPanelProps) {
 
       {/* Error global */}
       {error && view === 'idle' && (
-        <p style={{ color: 'var(--color-error-text)', fontSize: 'var(--font-size-small)', marginTop: 'var(--spacing-2)' }}>
+        <p className={styles.globalError}>
           {error}
         </p>
       )}

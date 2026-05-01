@@ -13,14 +13,7 @@ interface Props {
 export const EmployeeList = ({ employees }: Props) => {
   if (employees.length === 0) {
     return (
-      <div style={{
-        padding: "var(--spacing-8)",
-        textAlign: "center",
-        color: "var(--color-text-tertiary)",
-        background: "var(--color-bg-subtle)",
-        borderRadius: "var(--radius-lg)",
-        border: "1px dashed var(--color-border-default)",
-      }}>
+      <div className={styles.emptyState}>
         No hay empleados registrados todavía.
       </div>
     );

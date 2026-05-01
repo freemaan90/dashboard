@@ -108,3 +108,11 @@
   outline: 2px solid var(--color-error-500);
   outline-offset: 2px;
 }
+.emptyState {
+  padding: var(--spacing-8);
+  text-align: center;
+  color: var(--color-text-tertiary);
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--color-border-default);
+}

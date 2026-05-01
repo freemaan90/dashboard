@@ -91,12 +91,7 @@ export default async function TemplatePage() {
         <h2 className={styles.listTitle}>
           Tus templates
           {templates.length > 0 && (
-            <span style={{
-              marginLeft: "var(--spacing-2)",
-              fontSize: "var(--font-size-small)",
-              fontWeight: "var(--font-weight-regular)",
-              color: "var(--color-text-tertiary)",
-            }}>
+            <span className={styles.templateCount}>
               ({templates.length})
             </span>
           )}

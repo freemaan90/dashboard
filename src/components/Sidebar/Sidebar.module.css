@@ -193,3 +193,9 @@
   font-size: var(--font-size-xs, 0.75rem);
   color: rgba(196, 181, 253, 0.6);
 }
+.icon{
+  font-size: 1.5rem;
+}
+.userDetails {
+  overflow: hidden;
+}

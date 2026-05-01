@@ -27,7 +27,9 @@ export default async function DashboardPage() {
       <div className={styles.hero}>
         <div className={styles.heroText}>
           <p className={styles.greeting}>{greeting()},</p>
-          <h1 className={styles.name}>{displayUser?.name || session.user.name} 👋</h1>
+          <h1 className={styles.name}>
+            {displayUser?.name || session.user.name} 👋
+          </h1>
           <p className={styles.company}>{displayUser?.company}</p>
         </div>
       </div>
@@ -37,45 +39,45 @@ export default async function DashboardPage() {
         <h2 className={styles.sectionTitle}>Accesos rápidos</h2>
         <div className={styles.grid}>
           <Link href="/dashboard/whatsapp" className={styles.card}>
-            <div className={styles.cardIcon} style={{ background: "rgba(124, 58, 237, 0.1)" }}>
-              💬
-            </div>
+            <div className={`${styles.cardIcon} ${styles.nube}`}>💬</div>
             <div className={styles.cardContent}>
               <h3 className={styles.cardTitle}>WhatsApp</h3>
-              <p className={styles.cardDescription}>Conectá tu cuenta y enviá mensajes</p>
+              <p className={styles.cardDescription}>
+                Conectá tu cuenta y enviá mensajes
+              </p>
             </div>
             <span className={styles.cardArrow}>→</span>
           </Link>
 
           <Link href="/dashboard/templates" className={styles.card}>
-            <div className={styles.cardIcon} style={{ background: "rgba(79, 70, 229, 0.1)" }}>
-              📄
-            </div>
+            <div className={`${styles.cardIcon} ${styles.lista}`}>📄</div>
             <div className={styles.cardContent}>
               <h3 className={styles.cardTitle}>Templates</h3>
-              <p className={styles.cardDescription}>Creá y gestioná plantillas de mensajes</p>
+              <p className={styles.cardDescription}>
+                Creá y gestioná plantillas de mensajes
+              </p>
             </div>
             <span className={styles.cardArrow}>→</span>
           </Link>
 
           <Link href="/dashboard/employee" className={styles.card}>
-            <div className={styles.cardIcon} style={{ background: "rgba(16, 185, 129, 0.1)" }}>
-              👥
-            </div>
+            <div className={`${styles.cardIcon} ${styles.emplpeado}`}>👥</div>
             <div className={styles.cardContent}>
               <h3 className={styles.cardTitle}>Empleados</h3>
-              <p className={styles.cardDescription}>Administrá tu equipo y sus roles</p>
+              <p className={styles.cardDescription}>
+                Administrá tu equipo y sus roles
+              </p>
             </div>
             <span className={styles.cardArrow}>→</span>
           </Link>
 
           <Link href="/dashboard/account" className={styles.card}>
-            <div className={styles.cardIcon} style={{ background: "rgba(245, 158, 11, 0.1)" }}>
-              ⚙️
-            </div>
+            <div className={`${styles.cardIcon} ${styles.perfil}`}>⚙️</div>
             <div className={styles.cardContent}>
               <h3 className={styles.cardTitle}>Mi perfil</h3>
-              <p className={styles.cardDescription}>Configurá tu cuenta y preferencias</p>
+              <p className={styles.cardDescription}>
+                Configurá tu cuenta y preferencias
+              </p>
             </div>
             <span className={styles.cardArrow}>→</span>
           </Link>

@@ -195,6 +195,9 @@
   color: var(--color-input-text, #18181b);
   font-family: var(--font-family-sans);
 }
+.passwordInput {
+  padding-right: var(--spacing-20);
+}
 
 .input::placeholder {
   color: var(--color-input-placeholder, #71717a);
@@ -300,6 +303,7 @@
   text-align: center;
   font-size: var(--font-size-small);
   color: var(--color-text-tertiary);
+  margin-top: var(--spacing-6);
 }
 
 .forgotLink,

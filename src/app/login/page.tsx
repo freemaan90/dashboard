@@ -95,12 +95,11 @@ export default function LoginPage() {
                   id="password"
                   type={showPass ? "text" : "password"}
                   placeholder="••••••••"
-                  className={styles.input}
+                  className={`${styles.input} ${styles.passwordInput}`}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                   required
-                  style={{ paddingRight: "80px" }}
                 />
                 <button
                   type="button"
@@ -137,7 +136,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className={styles.registerText} style={{ marginTop: "var(--spacing-6)" }}>
+          <p className={styles.registerText}>
             ¿No tenés cuenta?{" "}
             <span
               className={styles.registerLink}
