@@ -36,14 +36,14 @@ export default async function TemplatePage() {
       throw new Error("No se pudo obtener la información del usuario");
     }   
 
-    await createTemplate(session.accessToken!, { title, content, userId: user.id });
+    await createTemplate(session.accessToken!, { title, content, userId: String(user.id )});
 
     revalidatePath("/dashboard/templates");
   }
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Templates de {user.name}</h1>
+      <h1 className={styles.title}>Templates de {user.company}</h1>
 
       {/* FORM */}
       <form action={handleCreate} className={styles.form}>
