@@ -51,8 +51,7 @@
   margin-bottom: var(--spacing-1);
 }
 
-.input,
-.textarea {
+.input {
   width: 100%;
   padding: var(--spacing-2) var(--spacing-3);
   border-radius: var(--radius-md);
@@ -66,21 +65,14 @@
     box-shadow var(--duration-fast) var(--easing-in-out);
 }
 
-.input:focus,
-.textarea:focus {
+.input:focus {
   outline: none;
   border-color: var(--color-primary-500);
   box-shadow: var(--shadow-brand);
 }
 
-.input::placeholder,
-.textarea::placeholder {
+.input::placeholder {
   color: var(--color-input-placeholder);
-}
-
-.textarea {
-  resize: vertical;
-  min-height: 100px;
 }
 
 .button {
@@ -185,4 +177,9 @@
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-regular);
   color: var(--color-text-tertiary);
+}
+
+.error {
+  font-size: var(--font-size-small);
+  color: var(--color-error, #ef4444);
 }

@@ -2,6 +2,7 @@ import styles from "./TemplatePage.module.css";
 import { getAllTemplates, createTemplate } from "@/app/actions/Templates";
 import { authMe } from "@/app/actions/User";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { TemplateForm } from "@/components/Template/TemplateForm";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 
@@ -56,35 +57,7 @@ export default async function TemplatePage() {
       </div>
 
       {/* Formulario */}
-      <form action={handleCreate} className={styles.form}>
-        <h2 className={styles.formTitle}>Nuevo template</h2>
-
-        <div>
-          <label htmlFor="title" className={styles.label}>Título</label>
-          <input
-            id="title"
-            name="title"
-            required
-            className={styles.input}
-            placeholder="Ej: Bienvenida al cliente"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="content" className={styles.label}>Contenido</label>
-          <textarea
-            id="content"
-            name="content"
-            required
-            className={styles.textarea}
-            placeholder="Hola {nombre}, te damos la bienvenida a..."
-          />
-        </div>
-
-        <button type="submit" className={styles.button}>
-          Crear template
-        </button>
-      </form>
+      <TemplateForm action={handleCreate} />
 
       {/* Lista */}
       <div className={styles.listSection}>

@@ -1,0 +1,91 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-1);
+}
+
+/* Contenedor que apila overlay y textarea */
+.editorWrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Estilos compartidos entre overlay y textarea */
+.overlay,
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body);
+  font-family: var(--font-family-sans);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Overlay: renderiza el HTML con highlights, no interactivo */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 120px;
+  background: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-input-text);
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Textarea real: transparente, encima del overlay */
+.textarea {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: 1px solid transparent;
+  color: transparent;
+  caret-color: var(--color-input-text);
+  outline: none;
+  resize: vertical;
+  transition:
+    border-color var(--duration-fast) var(--easing-in-out),
+    box-shadow var(--duration-fast) var(--easing-in-out);
+}
+
+.textarea::placeholder {
+  color: var(--color-input-placeholder);
+}
+
+.textarea:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-brand);
+}
+
+.textarea:focus + .overlay,
+.textarea:focus ~ .overlay {
+  border-color: var(--color-primary-500);
+}
+
+/* Cuando el textarea tiene foco, el overlay también muestra el borde activo */
+.editorWrapper:has(.textarea:focus) .overlay {
+  border-color: var(--color-primary-500);
+}
+
+/* Variables resaltadas — clase global para poder usarla en dangerouslySetInnerHTML */
+/* No se usa font-weight distinto para no desalinear el caret del textarea */
+:global(.highlight-var) {
+  color: var(--color-primary-500);
+}
