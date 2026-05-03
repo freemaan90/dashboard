@@ -14,13 +14,11 @@ export default async function TemplatePage() {
   }
 
   const user = await authMe(session.accessToken);
-
   if (!user) {
     throw new Error("No se pudo obtener la información del usuario");
   }
 
-  const templates = await getAllTemplates(user.id);
-
+  const templates = await getAllTemplates(user.id, session.accessToken);
   async function handleCreate(formData: FormData) {
     "use server";
 
@@ -64,9 +62,7 @@ export default async function TemplatePage() {
         <h2 className={styles.listTitle}>
           Tus templates
           {templates.length > 0 && (
-            <span className={styles.templateCount}>
-              ({templates.length})
-            </span>
+            <span className={styles.templateCount}>({templates.length})</span>
           )}
         </h2>
 
@@ -76,15 +72,21 @@ export default async function TemplatePage() {
           </p>
         ) : (
           <ul className={styles.list}>
-            {templates.map((t: any) => (
-              <li key={t.id} className={styles.item}>
-                <h3 className={styles.itemTitle}>{t.title}</h3>
-                <p className={styles.itemContent}>{t.content}</p>
-                <p className={styles.itemDate}>
-                  Creado: {new Date(t.createdAt).toLocaleString("es-AR")}
-                </p>
-              </li>
-            ))}
+            {templates
+              .sort(
+                (a, b) =>
+                  new Date(b.createdAt).getTime() -
+                  new Date(a.createdAt).getTime(),
+              )
+              .map((t) => (
+                <li key={t.id} className={styles.item}>
+                  <h3 className={styles.itemTitle}>{t.title}</h3>
+                  <p className={styles.itemContent}>{t.content}</p>
+                  <p className={styles.itemDate}>
+                    Actualizado: {new Date(t.updatedAt).toLocaleString("es-AR")}
+                  </p>
+                </li>
+              ))}
           </ul>
         )}
       </div>

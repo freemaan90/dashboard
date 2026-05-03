@@ -33,7 +33,6 @@ export const ResetLoginPage = ({
     }
 
     setLoading(true);
-    console.log(form);
     const res = await changePassword({
       currentPassword: form.actualPassword!,
       newPassword: form.confirmPassword!,

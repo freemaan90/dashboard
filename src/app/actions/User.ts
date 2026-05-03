@@ -38,7 +38,6 @@ export async function registerEmployeeAction(formData: UserInterface) {
 export async function handleRoleChange(id: number, formData: FormData) {
   const newRole = formData.get("role") as string;
 
-  console.log("Cambiando rol de", id, "a", newRole);
 
   // TODO: fetch a NestJS
   // await fetch(`${process.env.API_URL}/user/${id}/role`, {

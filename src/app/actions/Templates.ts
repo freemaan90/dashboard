@@ -1,10 +1,14 @@
 import { env } from "@/config/envs";
+import { Template } from "@/interfaces/Template.interface";
 import { api } from "@/lib";
 
-export const getAllTemplates = async (userId: string) => {
+export const getAllTemplates = async (userId: string, accessToken: string): Promise<Template[]> => {
   const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/template/${userId}`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
   });
 
   if (!res.ok) {
