@@ -1,0 +1,101 @@
+.listSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.listTitle {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.templateCount {
+  margin-left: var(--spacing-2);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-tertiary);
+}
+
+.empty {
+  padding: var(--spacing-8);
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-body);
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--color-border-default);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.templateItemContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item {
+  background: var(--color-bg-surface);
+  padding: var(--spacing-4) var(--spacing-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-default);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--duration-fast) var(--easing-in-out),
+    border-color var(--duration-fast) var(--easing-in-out);
+}
+
+.item:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-200);
+}
+
+.itemTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.itemContent {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-relaxed);
+}
+
+.itemDate {
+  margin-top: var(--spacing-3);
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-disabled);
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-3);;
+}
+.buttons{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);;
+}
+.applyButtonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.editDeleteContainer{
+    display: flex;
+    gap: var(--spacing-3);;
+}
+
+.buttonApply{
+    width: 100%;
+}

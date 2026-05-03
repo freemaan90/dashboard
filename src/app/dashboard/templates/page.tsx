@@ -3,6 +3,7 @@ import { getAllTemplates, createTemplate } from "@/app/actions/Templates";
 import { authMe } from "@/app/actions/User";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { TemplateForm } from "@/components/Template/TemplateForm";
+import { TemplateList } from "@/components/Template/TemplateList";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 
@@ -19,6 +20,7 @@ export default async function TemplatePage() {
   }
 
   const templates = await getAllTemplates(user.id, session.accessToken);
+
   async function handleCreate(formData: FormData) {
     "use server";
 
@@ -56,40 +58,8 @@ export default async function TemplatePage() {
 
       {/* Formulario */}
       <TemplateForm action={handleCreate} />
-
       {/* Lista */}
-      <div className={styles.listSection}>
-        <h2 className={styles.listTitle}>
-          Tus templates
-          {templates.length > 0 && (
-            <span className={styles.templateCount}>({templates.length})</span>
-          )}
-        </h2>
-
-        {templates.length === 0 ? (
-          <p className={styles.empty}>
-            No tenés templates todavía. ¡Creá el primero!
-          </p>
-        ) : (
-          <ul className={styles.list}>
-            {templates
-              .sort(
-                (a, b) =>
-                  new Date(b.createdAt).getTime() -
-                  new Date(a.createdAt).getTime(),
-              )
-              .map((t) => (
-                <li key={t.id} className={styles.item}>
-                  <h3 className={styles.itemTitle}>{t.title}</h3>
-                  <p className={styles.itemContent}>{t.content}</p>
-                  <p className={styles.itemDate}>
-                    Actualizado: {new Date(t.updatedAt).toLocaleString("es-AR")}
-                  </p>
-                </li>
-              ))}
-          </ul>
-        )}
-      </div>
+      <TemplateList templates={templates} />
     </div>
   );
 }

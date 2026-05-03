@@ -1,0 +1,28 @@
+.deleteButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-3);
+  background: var(--color-error-bg, #fff1f2);
+  color: var(--color-error-text, #be123c);
+  border: 1px solid var(--color-error-border, #f43f5e);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-sans);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-in-out),
+    color var(--duration-fast) var(--easing-in-out);
+}
+
+.deleteButton:hover {
+  background: var(--color-error-600, #e11d48);
+  color: #ffffff;
+  border-color: var(--color-error-600);
+}
+
+.deleteButton:focus-visible {
+  outline: 2px solid var(--color-error-500);
+  outline-offset: 2px;
+}
