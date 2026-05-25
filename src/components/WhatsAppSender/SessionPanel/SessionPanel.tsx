@@ -217,7 +217,7 @@ export default function SessionPanel({ onSessionCreated, templates = [] }: Sessi
 
   return (
     <div className={styles.panel}>
-      {view !== 'success' && view !== 'sendingSimple' && view !== 'sendingTemplate' && view !== 'sendingBulk' && (
+      {view !== 'success' && view !== 'sendingSimple' && (
         <h2 className={styles.title}>Nueva Sesión</h2>
       )}
 
@@ -336,8 +336,6 @@ export default function SessionPanel({ onSessionCreated, templates = [] }: Sessi
         <SuccessView
           sessionId={currentSessionId!}
           onSendSimple={() => setView('sendingSimple')}
-          onSendTemplate={() => setView('sendingTemplate')}
-          onSendBulk={() => setView('sendingBulk')}
           onCloseSession={handleCloseSession}
           closingSession={closingSession}
           closeError={closeError}
@@ -346,19 +344,6 @@ export default function SessionPanel({ onSessionCreated, templates = [] }: Sessi
       {view === 'sendingSimple' && (
         <SimpleMessageForm
           sessionId={currentSessionId!}
-          onBack={() => setView('success')}
-        />
-      )}
-      {view === 'sendingTemplate' && (
-        <TemplateMessageForm
-          sessionId={currentSessionId!}
-          onBack={() => setView('success')}
-        />
-      )}
-      {view === 'sendingBulk' && (
-        <BulkSendForm
-          sessionId={currentSessionId!}
-          templates={templates}
           onBack={() => setView('success')}
         />
       )}
