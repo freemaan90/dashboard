@@ -5,6 +5,8 @@ import { Template } from "@/interfaces/Template.interface";
 import { Button } from "../ui/Button/Button";
 import { Icon } from "../ui/Icon/Icon";
 import { ApplyTemplateModal } from "./ApplyTemplateModal";
+import { HighlightedText } from "./HighlightedText";
+import { TextAreaContent } from "./TextAreaContent";
 import styles from "./TemplateList.module.css";
 
 interface Props {
@@ -73,12 +75,9 @@ export const TemplateList = ({ templates, onDelete, onUpdate }: Props) => {
                         onChange={(e) => setEditState((s) => ({ ...s, title: e.target.value }))}
                         placeholder="Título"
                       />
-                      <textarea
-                        className={styles.editTextarea}
+                      <TextAreaContent
                         value={editState.content}
-                        onChange={(e) => setEditState((s) => ({ ...s, content: e.target.value }))}
-                        rows={4}
-                        placeholder="Contenido del template. Usá {{variable}} para variables."
+                        onChange={(v) => setEditState((s) => ({ ...s, content: v }))}
                       />
                       <div className={styles.editActions}>
                         <Button
@@ -99,7 +98,7 @@ export const TemplateList = ({ templates, onDelete, onUpdate }: Props) => {
                     <div className={styles.templateItemContainer}>
                       <div>
                         <h3 className={styles.itemTitle}>{t.title}</h3>
-                        <p className={styles.itemContent}>{t.content}</p>
+                        <HighlightedText content={t.content} className={styles.itemContent} />
                         <p className={styles.itemDate}>
                           Actualizado: {new Date(t.updatedAt).toLocaleString("es-AR")}
                         </p>

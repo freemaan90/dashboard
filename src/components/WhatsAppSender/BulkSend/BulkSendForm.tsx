@@ -7,6 +7,7 @@ import { renderTemplate, extractVariables } from "@/lib/renderTemplate";
 import { Template } from "@/interfaces/Template.interface";
 import Button from "../../ui/Button/Button";
 import { Icon } from "../../ui/Icon/Icon";
+import { HighlightedText } from "../../Template/HighlightedText";
 import styles from "./BulkSendForm.module.css";
 
 interface Props {
@@ -164,7 +165,7 @@ export default function BulkSendForm({ sessionId, templates, onBack }: Props) {
         {selectedTemplate && (
           <div className={styles.preview}>
             <p className={styles.previewLabel}>Vista previa del contenido:</p>
-            <pre className={styles.previewContent}>{selectedTemplate.content}</pre>
+            <HighlightedText content={selectedTemplate.content} className={styles.previewContent} />
             {variables.length > 0 && (
               <p className={styles.hint}>
                 Columnas requeridas en el Excel: <strong>{requiredColumns.join(", ")}</strong>

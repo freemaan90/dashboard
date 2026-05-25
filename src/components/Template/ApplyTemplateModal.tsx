@@ -7,6 +7,7 @@ import { renderTemplate, extractVariables } from "@/lib/renderTemplate";
 import { Template } from "@/interfaces/Template.interface";
 import Button from "../ui/Button/Button";
 import { Icon } from "../ui/Icon/Icon";
+import { HighlightedText } from "./HighlightedText";
 import styles from "./ApplyTemplateModal.module.css";
 
 interface Row {
@@ -157,7 +158,7 @@ export function ApplyTemplateModal({ template, onClose }: Props) {
           {/* Template preview */}
           <div className={styles.section}>
             <p className={styles.sectionLabel}>Contenido del template</p>
-            <pre className={styles.previewContent}>{template.content}</pre>
+            <HighlightedText content={template.content} className={styles.previewContent} />
             {variables.length > 0 && (
               <p className={styles.hint}>
                 Columnas requeridas en el Excel: <strong>{requiredColumns.join(", ")}</strong>
