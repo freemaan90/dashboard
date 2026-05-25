@@ -1,9 +1,7 @@
-import styles from "./TemplatePage.module.css";
 import { getAllTemplates, createTemplate, updateTemplate, deleteTemplate } from "@/app/actions/Templates";
 import { authMe } from "@/app/actions/User";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { TemplateForm } from "@/components/Template/TemplateForm";
-import { TemplateList } from "@/components/Template/TemplateList";
+import { TemplatePageClient } from "@/components/Template/TemplatePageClient";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 
@@ -64,22 +62,13 @@ export default async function TemplatePage() {
   }
 
   return (
-    <div className={styles.container}>
-      {/* Header */}
-      <div className={styles.header}>
-        <h1 className={styles.title}>Templates</h1>
-        <p className={styles.subtitle}>
-          {isEmployee
-            ? `Plantillas disponibles para ${user.company}`
-            : `Creá y reutilizá plantillas de mensajes para ${user.company}`}
-        </p>
-      </div>
-
-      {/* Formulario — solo para OWNER y SUPERVISOR */}
-      {!isEmployee && <TemplateForm action={handleCreate} />}
-
-      {/* Lista */}
-      <TemplateList templates={templates} onDelete={handleDelete} onUpdate={handleUpdate} />
-    </div>
+    <TemplatePageClient
+      templates={templates}
+      isEmployee={isEmployee}
+      company={user.company}
+      onCreate={handleCreate}
+      onDelete={handleDelete}
+      onUpdate={handleUpdate}
+    />
   );
 }

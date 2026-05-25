@@ -6,6 +6,7 @@ import styles from "../../app/dashboard/templates/TemplatePage.module.css";
 
 interface TemplateFormProps {
   action: (formData: FormData) => Promise<void>;
+  onSuccess?: () => void;
 }
 
 type ActionState = { success: boolean; error?: string } | null;
@@ -24,7 +25,7 @@ async function formAction(
   }
 }
 
-export function TemplateForm({ action }: TemplateFormProps) {
+export function TemplateForm({ action, onSuccess }: TemplateFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const textAreaResetRef = useRef<() => void>(null);
 
@@ -43,6 +44,7 @@ export function TemplateForm({ action }: TemplateFormProps) {
     if (state?.success) {
       formRef.current?.reset();
       textAreaResetRef.current?.();
+      onSuccess?.();
     }
   }, [state]);
 
