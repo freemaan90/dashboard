@@ -70,6 +70,7 @@ export const EmployeeForm = ({ setShowForm,accessToken,company, companyLogo, id 
         placeholder="Ingrese la contraseña del empleado"
         value={form.password}
         onChange={(e) => setForm({ ...form, password: e.target.value })}
+        showPasswordToggle
       />
       <Input
         type="password"
@@ -78,6 +79,7 @@ export const EmployeeForm = ({ setShowForm,accessToken,company, companyLogo, id 
         placeholder="Repita la contraseña del empleado"
         value={form.confirmPassword}
         onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
+        showPasswordToggle
       />
 
       <div className={styles.field}>
