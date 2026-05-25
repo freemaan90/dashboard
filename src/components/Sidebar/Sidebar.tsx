@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./Sidebar.module.css";
 import LogoutButton from "../ui/Button/LogoutButton";
 import { Session } from "next-auth";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { Roles } from "@/enum/Roles";
 import {
@@ -13,6 +13,7 @@ import {
   FileText,
   Users,
   User,
+  X,
 } from "lucide-react";
 
 const navItems = [
@@ -23,9 +24,24 @@ const navItems = [
   { href: "/dashboard/account", label: "Perfil", icon: User },
 ];
 
-export default function Sidebar({ session }: { session: Session | null }) {
+function isValidUrl(url: string) {
+  return url.startsWith("http://") || url.startsWith("https://");
+}
+
+export default function Sidebar({
+  session: serverSession,
+  isOpen,
+  onClose,
+}: {
+  session: Session | null;
+  isOpen?: boolean;
+  onClose?: () => void;
+}) {
+  const { data: clientSession } = useSession();
   const pathname = usePathname();
-  const { user } = session || {};
+
+  // Prefer live client session (reflects update() calls) over stale server prop
+  const user = clientSession?.user ?? serverSession?.user;
   const { company = "", companyLogo = "", role = Roles.EMPLOYEE, name = "" } = user || {};
 
   const isActive = (href: string, exact?: boolean) =>
@@ -36,12 +52,22 @@ export default function Sidebar({ session }: { session: Session | null }) {
     : "U";
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+      {onClose && (
+        <button
+          className={styles.closeButton}
+          onClick={onClose}
+          aria-label="Cerrar menú"
+        >
+          <X size={16} />
+        </button>
+      )}
       {/* Header — logo y nombre de empresa */}
       <div className={styles.header}>
         <div className={styles.logoWrapper}>
-          {companyLogo ? (
-            <Image
+          {companyLogo && isValidUrl(companyLogo) ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               src={companyLogo}
               alt={company}
               width={48}
@@ -70,6 +96,7 @@ export default function Sidebar({ session }: { session: Session | null }) {
               href={href}
               className={`${styles.navItem} ${active ? styles.active : ""}`}
               aria-current={active ? "page" : undefined}
+              onClick={onClose}
             >
               <span className={styles.navIcon}>
                 <Icon size={18} aria-hidden="true" />

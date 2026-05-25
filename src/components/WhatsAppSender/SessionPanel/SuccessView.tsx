@@ -13,6 +13,7 @@ interface SuccessViewProps {
   sessionId: string;
   onSendSimple: () => void;
   onSendTemplate: () => void;
+  onSendBulk: () => void;
   onCloseSession: () => void;
   closingSession: boolean;
   closeError: string;
@@ -22,6 +23,7 @@ export default function SuccessView({
   sessionId,
   onSendSimple,
   onSendTemplate,
+  onSendBulk,
   onCloseSession,
   closingSession,
   closeError,
@@ -62,6 +64,16 @@ export default function SuccessView({
         >
           <Icon name="Copy" size={16} aria-hidden="true" />
           Enviar plantilla
+        </Button>
+
+        <Button
+          variant="outline"
+          size="md"
+          onClick={onSendBulk}
+          disabled={closingSession}
+        >
+          <Icon name="FileSpreadsheet" size={16} aria-hidden="true" />
+          Envío masivo
         </Button>
 
         <Button

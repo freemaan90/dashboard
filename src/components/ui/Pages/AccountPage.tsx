@@ -3,6 +3,7 @@ import { UserSession } from "@/interfaces/User.interface";
 import ChangePasswordButton from "../Button/ChangePasswordButton";
 import styles from "@/app/dashboard/account/Account.module.css";
 import EditPhone from "../Input/EditPhone";
+import { LogoUpload } from "../LogoUpload/LogoUpload";
 
 export const AccountPage = ({ user }: { user: UserSession }) => {
   const initials = [user.name?.[0], user.lastName?.[0]]
@@ -27,13 +28,11 @@ export const AccountPage = ({ user }: { user: UserSession }) => {
 
         {/* Avatar + nombre */}
         <div className={styles.cardHeader}>
-          <div className={styles.avatar} aria-hidden="true">
-            {user.companyLogo ? (
-              <img src={user.companyLogo} alt={`Logo de ${user.company}`} />
-            ) : (
-              <span>{initials}</span>
-            )}
-          </div>
+          <LogoUpload
+            userId={user.id}
+            currentLogo={user.companyLogo?.startsWith("http") ? user.companyLogo : ""}
+            initials={initials}
+          />
           <div className={styles.avatarInfo}>
             <h2 className={styles.name}>
               {user.name} {user.lastName}
@@ -74,7 +73,7 @@ export const AccountPage = ({ user }: { user: UserSession }) => {
           <div className={styles.infoItem}>
             <span className={styles.label}>Logo de empresa</span>
             <span className={styles.value}>
-              {user.companyLogo ? "Cargado" : "No disponible"}
+              Hacé clic en el avatar para cambiarlo
             </span>
           </div>
         </div>

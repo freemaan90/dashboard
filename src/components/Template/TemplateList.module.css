@@ -99,3 +99,51 @@
 .buttonApply{
     width: 100%;
 }
+
+/* Inline edit form */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.editInput {
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  background: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-input-text);
+  font-size: var(--font-size-body);
+  font-family: var(--font-family-sans);
+}
+
+.editInput:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-brand);
+}
+
+.editTextarea {
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  background: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-input-text);
+  font-size: var(--font-size-body);
+  font-family: var(--font-family-sans);
+  resize: vertical;
+  line-height: var(--line-height-relaxed);
+}
+
+.editTextarea:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-brand);
+}
+
+.editActions {
+  display: flex;
+  gap: var(--spacing-2);
+}

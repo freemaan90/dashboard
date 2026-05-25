@@ -33,7 +33,22 @@ export const useUserForm = (
       return false;
     }
 
-    await registerAction({ ...form });
+    try {
+      await registerAction({ ...form });
+    } catch (err: unknown) {
+      // Next.js redirect() throws with a NEXT_REDIRECT digest — let it propagate
+      if (
+        err &&
+        typeof err === "object" &&
+        "digest" in err &&
+        typeof (err as { digest: unknown }).digest === "string" &&
+        (err as { digest: string }).digest.startsWith("NEXT_REDIRECT")
+      ) {
+        throw err;
+      }
+      setErrorMsg(err instanceof Error ? err.message : "Error creando usuario");
+      return false;
+    }
     return true;
   };
 
@@ -48,6 +63,7 @@ export const useUserForm = (
     const body = {
       ...form,
       confirmPassword: undefined,
+      actualPassword: undefined,
       company: undefined,
       companyLogo: undefined,
       ownerId: undefined,
