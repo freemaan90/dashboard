@@ -114,7 +114,7 @@ export default function BulkSendForm({ sessionId, templates, onBack }: Props) {
       .filter(Boolean) as { phone: string; message: string }[];
 
     try {
-      const { jobId } = await startBulkSend(sessionId, messages);
+      const { jobId } = await startBulkSend(sessionId, messages, selectedTemplate.title);
       setJobStatus({ jobId, status: "processing", total: messages.length, done: 0, failed: [] });
     } catch (err) {
       setPollError(err instanceof Error ? err.message : "Error al iniciar el envío.");

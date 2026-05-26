@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import * as XLSX from "xlsx";
 import { startBulkSend, getBulkSendStatus, BulkJobStatus } from "@/app/actions/Message";
 import { renderTemplate, extractVariables } from "@/lib/renderTemplate";
@@ -41,12 +42,11 @@ export function ApplyTemplateModal({ template, onClose }: Props) {
     setSessionId(stored);
   }, []);
 
-  // Close on Escape — only when not running
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape" && !isRunning) onClose(); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [onClose, isRunning]);
+  }, [onClose]);
 
   // Poll job status while active
   useEffect(() => {
@@ -121,7 +121,7 @@ export function ApplyTemplateModal({ template, onClose }: Props) {
       .filter(Boolean) as { phone: string; message: string }[];
 
     try {
-      const { jobId } = await startBulkSend(sessionId, messages);
+      const { jobId } = await startBulkSend(sessionId, messages, template.title);
       setJobStatus({ jobId, status: "processing", total: messages.length, done: 0, failed: [] });
     } catch (err) {
       setPollError(err instanceof Error ? err.message : "Error al iniciar el envío.");
@@ -136,10 +136,10 @@ export function ApplyTemplateModal({ template, onClose }: Props) {
 
   const sent = jobStatus ? jobStatus.done - jobStatus.failed.length : 0;
 
-  return (
+  return createPortal(
     <div
       className={styles.overlay}
-      onClick={(e) => { if (e.target === e.currentTarget && !isRunning) onClose(); }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className={styles.modal} role="dialog" aria-modal="true">
         <div className={styles.modalHeader}>
@@ -147,7 +147,6 @@ export function ApplyTemplateModal({ template, onClose }: Props) {
           <button
             className={styles.closeBtn}
             onClick={onClose}
-            disabled={!!isRunning}
             aria-label="Cerrar"
           >
             <Icon name="X" size={20} />
@@ -301,10 +300,16 @@ export function ApplyTemplateModal({ template, onClose }: Props) {
               Cerrar
             </Button>
           ) : (
-            <p className={styles.hint}>El envío continúa en el servidor aunque cierres esta ventana.</p>
+            <div className={styles.runningFooter}>
+              <p className={styles.hint}>El envío continúa en el servidor aunque cierres esta ventana.</p>
+              <Button variant="outline" size="sm" onClick={onClose}>
+                Cerrar
+              </Button>
+            </div>
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

@@ -13,6 +13,7 @@ import {
   FileText,
   Users,
   User,
+  BarChart2,
   X,
 } from "lucide-react";
 
@@ -20,6 +21,7 @@ const navItems = [
   { href: "/dashboard", label: "Inicio", icon: LayoutDashboard, exact: true },
   { href: "/dashboard/whatsapp", label: "WhatsApp", icon: MessageSquare },
   { href: "/dashboard/templates", label: "Templates", icon: FileText },
+  { href: "/dashboard/campaigns", label: "Campañas", icon: BarChart2 },
   { href: "/dashboard/employee", label: "Empleados", icon: Users, ownerOnly: true },
   { href: "/dashboard/account", label: "Perfil", icon: User },
 ];

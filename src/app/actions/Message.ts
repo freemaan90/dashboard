@@ -40,6 +40,7 @@ export interface BulkJobStatus {
 export async function startBulkSend(
   sessionId: string,
   messages: { phone: string; message: string }[],
+  templateTitle?: string,
 ): Promise<{ jobId: string }> {
   const token = await getAccessToken();
   const res = await fetch(`${API_URL}/whatsapp-sender/sessions/${sessionId}/bulk-send`, {
@@ -48,7 +49,7 @@ export async function startBulkSend(
       'Content-Type': 'application/json',
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    body: JSON.stringify({ messages }),
+    body: JSON.stringify({ messages, templateTitle }),
     cache: 'no-store',
   });
   if (!res.ok) {
