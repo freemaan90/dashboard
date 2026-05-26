@@ -17,12 +17,12 @@ export const getAllTemplates = async (userId: string, accessToken: string): Prom
   return res.json();
 }
 
-export async function createTemplate(accessToken: string, data: { title: string; content: string; userId: string }) {
+export async function createTemplate(accessToken: string, data: { title: string; content: string; userId: string; imageUrl?: string }) {
   const res = await api("/template", "POST", data, accessToken);
   return res;
 }
 
-export async function updateTemplate(accessToken: string, templateId: number, data: { title: string; content: string }) {
+export async function updateTemplate(accessToken: string, templateId: number, data: { title: string; content: string; imageUrl?: string }) {
   const res = await api(`/template/${templateId}`, "PATCH", data, accessToken);
   return res;
 }

@@ -12,7 +12,7 @@ interface Props {
   company: string;
   onCreate: (formData: FormData) => Promise<void>;
   onDelete: (id: number) => Promise<void>;
-  onUpdate: (id: number, data: { title: string; content: string }) => Promise<void>;
+  onUpdate: (id: number, data: { title: string; content: string; imageUrl?: string }) => Promise<void>;
 }
 
 type View = "list" | "new";

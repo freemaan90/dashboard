@@ -31,6 +31,7 @@ export default async function TemplatePage() {
 
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
+    const imageUrl = (formData.get("imageUrl") as string) || undefined;
 
     if (!session?.accessToken || !session.user) {
       throw new Error("No hay sesión activa");
@@ -42,6 +43,7 @@ export default async function TemplatePage() {
       title,
       content,
       userId: ownerId,
+      imageUrl,
     });
 
     revalidatePath("/dashboard/templates");
@@ -54,7 +56,7 @@ export default async function TemplatePage() {
     revalidatePath("/dashboard/templates");
   }
 
-  async function handleUpdate(templateId: number, data: { title: string; content: string }) {
+  async function handleUpdate(templateId: number, data: { title: string; content: string; imageUrl?: string }) {
     "use server";
     if (!session?.accessToken) throw new Error("No hay sesión activa");
     await updateTemplate(session.accessToken, templateId, data);

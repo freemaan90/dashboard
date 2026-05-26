@@ -113,6 +113,74 @@
   color: var(--color-error, #ef4444);
 }
 
+/* ─── Image upload ───────────────────────────────────────────────────────── */
+
+.hiddenFileInput {
+  display: none;
+}
+
+.imageUploadArea {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.imageUploadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2) var(--spacing-4);
+  border: 1px dashed var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  font-family: var(--font-family-sans);
+  cursor: pointer;
+  width: fit-content;
+  transition:
+    border-color var(--duration-fast) var(--easing-in-out),
+    color var(--duration-fast) var(--easing-in-out);
+}
+
+.imageUploadButton:hover:not(:disabled) {
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-500);
+}
+
+.imageUploadButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.imagePreviewContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.imagePreview {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+}
+
+.imageRemoveButton {
+  font-size: var(--font-size-small);
+  color: var(--color-error, #ef4444);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-family-sans);
+}
+
+.imageRemoveButton:hover {
+  text-decoration: underline;
+}
+
 /* ─── View tabs ─────────────────────────────────────────────────────────── */
 
 .tabs {
