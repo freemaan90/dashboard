@@ -2,15 +2,18 @@
 
 import { useState } from "react";
 import { Session } from "next-auth";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import { TrialBanner } from "@/components/Billing/TrialBanner";
 import styles from "./dashboard.module.css";
 
 export default function DashboardShell({
   session,
+  trialDaysRemaining,
   children,
 }: {
   session: Session | null;
+  trialDaysRemaining?: number | null;
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -44,7 +47,12 @@ export default function DashboardShell({
         onClose={() => setSidebarOpen(false)}
       />
 
-      <main className={styles.main}>{children}</main>
+      <div className={styles.mainWrapper}>
+        {typeof trialDaysRemaining === "number" && (
+          <TrialBanner daysRemaining={trialDaysRemaining} />
+        )}
+        <main className={styles.main}>{children}</main>
+      </div>
     </div>
   );
 }

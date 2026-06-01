@@ -14,6 +14,7 @@ import {
   Users,
   User,
   BarChart2,
+  CreditCard,
   X,
 } from "lucide-react";
 
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/dashboard/templates", label: "Templates", icon: FileText },
   { href: "/dashboard/campaigns", label: "Campañas", icon: BarChart2 },
   { href: "/dashboard/employee", label: "Empleados", icon: Users, ownerOnly: true },
+  { href: "/dashboard/billing", label: "Facturación", icon: CreditCard, strictOwnerOnly: true },
   { href: "/dashboard/account", label: "Perfil", icon: User },
 ];
 
@@ -89,7 +91,8 @@ export default function Sidebar({
       <nav className={styles.nav} aria-label="Navegación principal">
         <p className={styles.navLabel}>Menú</p>
 
-        {navItems.map(({ href, label, icon: Icon, exact, ownerOnly }) => {
+        {navItems.map(({ href, label, icon: Icon, exact, ownerOnly, strictOwnerOnly }: any) => {
+          if (strictOwnerOnly && role !== Roles.OWNER) return null;
           if (ownerOnly && role === Roles.EMPLOYEE) return null;
           const active = isActive(href, exact);
           return (

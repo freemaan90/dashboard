@@ -1,0 +1,64 @@
+.card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.cardTitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide, 0.05em);
+}
+
+.methodInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.cardIcon {
+  width: 42px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-subtle, #f4f4f5);
+  border: 1px solid var(--color-border-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.cardDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardNumber {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono, monospace);
+}
+
+.cardType {
+  font-size: var(--font-size-small);
+  color: var(--color-text-tertiary);
+}
+
+.emptyState {
+  font-size: var(--font-size-small);
+  color: var(--color-text-tertiary);
+}
+
+.error {
+  font-size: var(--font-size-small);
+  color: var(--color-error-text, #9f1239);
+}
