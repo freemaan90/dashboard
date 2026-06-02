@@ -1,24 +1,47 @@
 "use client";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./UserForm.module.css";
 import { useUserForm } from "@/hooks/useUserForm";
 import { InputPassword } from "../Input/InputPassword";
 import { PasswordType, Roles } from "@/enum/Roles";
+import { env } from "@/config/envs";
+
 export const UserForm = () => {
   const router = useRouter();
-  const {
-    form,
-    setForm,
-    errorMsg,
-    handleSubmit,
-  } = useUserForm("OWNER");
+  const { form, setForm, errorMsg, handleSubmit } = useUserForm("OWNER");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleLogoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const data = new FormData();
+    data.append("file", file);
+
+    setUploading(true);
+    try {
+      const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/upload/logo`, {
+        method: "POST",
+        body: data,
+      });
+      if (!res.ok) throw new Error();
+      const json = await res.json();
+      setForm({ ...form, companyLogo: json.url });
+    } catch {
+      // mantiene el valor anterior si falla
+    } finally {
+      setUploading(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.card}>
         <h1 className={styles.title}>Crear cuenta</h1>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={async (e) => { e.preventDefault(); await handleSubmit(); }} className={styles.form}>
           <input
             type="text"
             placeholder="Nombre"
@@ -51,13 +74,37 @@ export const UserForm = () => {
             onChange={(e) => setForm({ ...form, company: e.target.value })}
           />
 
-          <input
-            type="text"
-            placeholder="Lgogo de la empresa (URL)"
-            className={styles.input}
-            value={form.companyLogo}
-            onChange={(e) => setForm({ ...form, companyLogo: e.target.value })}
-          />
+          <div className={styles.logoUpload}>
+            {form.companyLogo ? (
+              <img
+                src={form.companyLogo}
+                alt="Logo"
+                className={styles.logoPreview}
+                onClick={() => fileInputRef.current?.click()}
+              />
+            ) : (
+              <div
+                className={styles.logoPlaceholder}
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Logo
+              </div>
+            )}
+            {uploading ? (
+              <span className={styles.uploading}>Subiendo...</span>
+            ) : (
+              <label className={styles.logoLabel} onClick={() => fileInputRef.current?.click()}>
+                {form.companyLogo ? "Cambiar logo" : "Subir logo de empresa"}
+              </label>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className={styles.logoInput}
+              onChange={handleLogoChange}
+            />
+          </div>
 
           <input
             type="email"

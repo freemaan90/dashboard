@@ -15,6 +15,8 @@ import { Icon } from "../../ui/Icon/Icon";
 import SuccessView from "./SuccessView";
 import SimpleMessageForm from "./SimpleMessageForm";
 import TemplateMessageForm from "./TemplateMessageForm";
+import BulkSendForm from "../BulkSend/BulkSendForm";
+import { Template } from "@/interfaces/Template.interface";
 
 type PanelView =
   | 'idle'
@@ -24,13 +26,15 @@ type PanelView =
   | 'checkingStatus'
   | 'success'
   | 'sendingSimple'
-  | 'sendingTemplate';
+  | 'sendingTemplate'
+  | 'sendingBulk';
 
 interface SessionPanelProps {
   onSessionCreated?: () => void;
+  templates?: Template[];
 }
 
-export default function SessionPanel({ onSessionCreated }: SessionPanelProps) {
+export default function SessionPanel({ onSessionCreated, templates = [] }: SessionPanelProps) {
   const [view, setView] = useState<PanelView>('idle');
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
   const [qrCode, setQrCode] = useState<string | null>(null);
@@ -213,7 +217,7 @@ export default function SessionPanel({ onSessionCreated }: SessionPanelProps) {
 
   return (
     <div className={styles.panel}>
-      {view !== 'success' && view !== 'sendingSimple' && view !== 'sendingTemplate' && (
+      {view !== 'success' && view !== 'sendingSimple' && (
         <h2 className={styles.title}>Nueva Sesión</h2>
       )}
 
@@ -327,12 +331,11 @@ export default function SessionPanel({ onSessionCreated }: SessionPanelProps) {
         </div>
       )}
 
-      {/* Vista success, sendingSimple, sendingTemplate */}
+      {/* Vista success, sendingSimple, sendingTemplate, sendingBulk */}
       {view === 'success' && (
         <SuccessView
           sessionId={currentSessionId!}
           onSendSimple={() => setView('sendingSimple')}
-          onSendTemplate={() => setView('sendingTemplate')}
           onCloseSession={handleCloseSession}
           closingSession={closingSession}
           closeError={closeError}
@@ -340,12 +343,6 @@ export default function SessionPanel({ onSessionCreated }: SessionPanelProps) {
       )}
       {view === 'sendingSimple' && (
         <SimpleMessageForm
-          sessionId={currentSessionId!}
-          onBack={() => setView('success')}
-        />
-      )}
-      {view === 'sendingTemplate' && (
-        <TemplateMessageForm
           sessionId={currentSessionId!}
           onBack={() => setView('success')}
         />

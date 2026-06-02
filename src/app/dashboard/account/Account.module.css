@@ -178,3 +178,19 @@
   color: var(--color-text-tertiary);
   margin-top: var(--spacing-1);
 }
+
+@media (max-width: 599px) {
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}

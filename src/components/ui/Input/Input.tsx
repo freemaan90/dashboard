@@ -1,4 +1,5 @@
-import React, { forwardRef, useId } from 'react';
+import React, { forwardRef, useId, useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import styles from './Input.module.css';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -14,6 +15,8 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   trailingIcon?: React.ReactNode;
   /** Clases adicionales para el contenedor raíz */
   containerClassName?: string;
+  /** Muestra botón para revelar/ocultar contraseña (solo para type="password") */
+  showPasswordToggle?: boolean;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -28,12 +31,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled = false,
       className,
       containerClassName,
+      showPasswordToggle,
       ...rest
     },
     ref
   ) => {
     const generatedId = useId();
     const id = idProp ?? generatedId;
+    const [showPass, setShowPass] = useState(false);
 
     const hasError = Boolean(errorMessage);
     const helperId = helperText ? `${id}-helper` : undefined;
@@ -53,7 +58,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputClasses = [
       styles.input,
       leadingIcon ? styles['input--has-leading'] : '',
-      trailingIcon ? styles['input--has-trailing'] : '',
+      (trailingIcon || showPasswordToggle) ? styles['input--has-trailing'] : '',
       className ?? '',
     ]
       .filter(Boolean)
@@ -82,12 +87,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-describedby={describedBy}
             className={inputClasses}
             {...rest}
+            type={showPasswordToggle ? (showPass ? 'text' : 'password') : rest.type}
           />
 
-          {trailingIcon && (
+          {trailingIcon && !showPasswordToggle && (
             <span className={`${styles.icon} ${styles['icon--trailing']}`} aria-hidden="true">
               {trailingIcon}
             </span>
+          )}
+
+          {showPasswordToggle && (
+            <button
+              type="button"
+              className={styles.toggleBtn}
+              onClick={() => setShowPass((v) => !v)}
+              aria-label={showPass ? 'Ocultar contraseña' : 'Ver contraseña'}
+              tabIndex={-1}
+            >
+              {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+            </button>
           )}
         </div>
 

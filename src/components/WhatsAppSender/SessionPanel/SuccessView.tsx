@@ -12,7 +12,6 @@ import styles from "./SuccessView.module.css";
 interface SuccessViewProps {
   sessionId: string;
   onSendSimple: () => void;
-  onSendTemplate: () => void;
   onCloseSession: () => void;
   closingSession: boolean;
   closeError: string;
@@ -21,7 +20,6 @@ interface SuccessViewProps {
 export default function SuccessView({
   sessionId,
   onSendSimple,
-  onSendTemplate,
   onCloseSession,
   closingSession,
   closeError,
@@ -52,16 +50,6 @@ export default function SuccessView({
         >
           <Icon name="MessageSquare" size={16} aria-hidden="true" />
           Enviar mensaje simple
-        </Button>
-
-        <Button
-          variant="outline"
-          size="md"
-          onClick={onSendTemplate}
-          disabled={closingSession}
-        >
-          <Icon name="Copy" size={16} aria-hidden="true" />
-          Enviar plantilla
         </Button>
 
         <Button

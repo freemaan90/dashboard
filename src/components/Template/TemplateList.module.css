@@ -40,6 +40,22 @@
     align-items: center;
 }
 
+.templateItemContent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.imageThumbnail {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+  flex-shrink: 0;
+}
+
 .item {
   background: var(--color-bg-surface);
   padding: var(--spacing-4) var(--spacing-6);
@@ -98,4 +114,133 @@
 
 .buttonApply{
     width: 100%;
+}
+
+/* Inline edit form */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.editInput {
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  background: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-input-text);
+  font-size: var(--font-size-body);
+  font-family: var(--font-family-sans);
+}
+
+.editInput:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-brand);
+}
+
+.editTextarea {
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  background: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-input-text);
+  font-size: var(--font-size-body);
+  font-family: var(--font-family-sans);
+  resize: vertical;
+  line-height: var(--line-height-relaxed);
+}
+
+.editTextarea:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-brand);
+}
+
+.editActions {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* ─── Edit image upload ──────────────────────────────────────────────────── */
+
+.hiddenFileInput {
+  display: none;
+}
+
+.editImageLabel {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-1);
+}
+
+.editImageArea {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.editImageUploadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2) var(--spacing-4);
+  border: 1px dashed var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  font-family: var(--font-family-sans);
+  cursor: pointer;
+  width: fit-content;
+  transition:
+    border-color var(--duration-fast) var(--easing-in-out),
+    color var(--duration-fast) var(--easing-in-out);
+}
+
+.editImageUploadButton:hover:not(:disabled) {
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-500);
+}
+
+.editImageUploadButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.editImagePreviewContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.editImagePreview {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+}
+
+.editImageRemoveButton {
+  font-size: var(--font-size-small);
+  color: var(--color-error, #ef4444);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-family-sans);
+}
+
+.editImageRemoveButton:hover {
+  text-decoration: underline;
+}
+
+.editUploadError {
+  font-size: var(--font-size-small);
+  color: var(--color-error, #ef4444);
+  margin-top: var(--spacing-1);
 }

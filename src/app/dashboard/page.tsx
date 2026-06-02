@@ -1,6 +1,8 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { authMe } from "../actions/User";
+import { getCampaigns } from "../actions/Campaigns";
+import { CampaignWidget } from "@/components/Campaign/CampaignWidget";
 import styles from "./DashboardHome.module.css";
 import Link from "next/link";
 
@@ -13,6 +15,10 @@ export default async function DashboardPage() {
 
   const user = session.accessToken && (await authMe(session.accessToken));
   const displayUser = user || null;
+
+  const effectiveOwnerId = session.user.ownerId ?? session.user.id;
+  const campaigns = await getCampaigns(Number(effectiveOwnerId));
+  const lastCampaign = campaigns[0] ?? null;
 
   const greeting = () => {
     const hour = new Date().getHours();
@@ -33,6 +39,9 @@ export default async function DashboardPage() {
           <p className={styles.company}>{displayUser?.company}</p>
         </div>
       </div>
+
+      {/* Last campaign widget */}
+      <CampaignWidget campaign={lastCampaign} />
 
       {/* Quick actions */}
       <div className={styles.section}>
@@ -77,6 +86,17 @@ export default async function DashboardPage() {
               <h3 className={styles.cardTitle}>Mi perfil</h3>
               <p className={styles.cardDescription}>
                 Configurá tu cuenta y preferencias
+              </p>
+            </div>
+            <span className={styles.cardArrow}>→</span>
+          </Link>
+
+          <Link href="/dashboard/campaigns" className={styles.card}>
+            <div className={`${styles.cardIcon} ${styles.campania}`}>📊</div>
+            <div className={styles.cardContent}>
+              <h3 className={styles.cardTitle}>Campañas</h3>
+              <p className={styles.cardDescription}>
+                Historial y resultados de tus envíos masivos
               </p>
             </div>
             <span className={styles.cardArrow}>→</span>

@@ -29,6 +29,8 @@ import {
   MessageSquare,
   Send,
   ArrowLeft,
+  Upload,
+  FileSpreadsheet,
   type LucideProps,
 } from 'lucide-react';
 import styles from './Icon.module.css';
@@ -64,6 +66,8 @@ const iconMap = {
   MessageSquare,
   Send,
   ArrowLeft,
+  Upload,
+  FileSpreadsheet,
 } as const;
 
 export type IconName = keyof typeof iconMap;

@@ -1,38 +1,67 @@
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  min-height: 100dvh;
   background: #f4f4f4;
+  padding: 24px 16px;
+}
+
+@media (min-width: 480px) {
+  .container {
+    align-items: center;
+    padding: 32px 16px;
+  }
 }
 
 .card {
   background: white;
-  padding: 32px;
+  padding: 24px 20px;
   border-radius: 12px;
-  width: 360px;
+  width: 100%;
+  max-width: 400px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
+@media (min-width: 480px) {
+  .card {
+    padding: 32px;
+  }
+}
+
 .title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   text-align: center;
+}
+
+@media (min-width: 480px) {
+  .title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
+}
+
+@media (min-width: 480px) {
+  .form {
+    gap: 16px;
+  }
 }
 
 .input {
-  padding: 12px;
+  padding: 11px 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 15px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .input:focus {
@@ -48,6 +77,7 @@
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  width: 100%;
 }
 
 .button:hover {
@@ -75,4 +105,56 @@
 
 .loginLink:hover {
   text-decoration: underline;
+}
+
+/* ── Logo upload ── */
+
+.logoUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoPreview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
+.logoPlaceholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.logoLabel {
+  font-size: 13px;
+  color: #555;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.logoLabel:hover {
+  color: #1e1e1e;
+}
+
+.logoInput {
+  display: none;
+}
+
+.uploading {
+  font-size: 13px;
+  color: #888;
 }

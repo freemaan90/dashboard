@@ -5,7 +5,7 @@ import { Employees, UserInterface, UserSession } from "@/interfaces/User.interfa
 import { redirect } from "next/navigation";
 
 export async function registerAction(formData: UserInterface) {
-  const body = { ...formData, confirmPassword: undefined, role: undefined };
+  const { confirmPassword: _, role: __, actualPassword: ___, ownerId: ____, ...body } = formData;
   const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -20,7 +20,7 @@ export async function registerAction(formData: UserInterface) {
 }
 
 export async function registerEmployeeAction(formData: UserInterface) {
-  const body = { ...formData, confirmPassword: undefined, role: undefined };
+  const { confirmPassword: _, actualPassword: __, ownerId: ___, company: ____, companyLogo: _____, ...body } = formData;
   const res = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/user/new-employee`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

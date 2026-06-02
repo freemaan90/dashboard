@@ -1,0 +1,8 @@
+.root {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+:global(.highlight-var) {
+  color: var(--color-primary-500);
+}

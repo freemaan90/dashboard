@@ -64,18 +64,22 @@ export const EmployeeForm = ({ setShowForm,accessToken,company, companyLogo, id 
       />
 
       <Input
+        type="password"
         label="Contraseña"
         name="employeePassword"
         placeholder="Ingrese la contraseña del empleado"
         value={form.password}
         onChange={(e) => setForm({ ...form, password: e.target.value })}
+        showPasswordToggle
       />
       <Input
+        type="password"
         label="Repetir Contraseña"
         name="confirmPassword"
-        placeholder="Ingrese la contraseña del empleado"
+        placeholder="Repita la contraseña del empleado"
         value={form.confirmPassword}
         onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
+        showPasswordToggle
       />
 
       <div className={styles.field}>
