@@ -1,10 +1,26 @@
+"use client";
 import { Template } from "@/interfaces/Template.interface";
 import styles from "./TemplateList.module.css";
-import { DeleteButton } from "../ui/Button/DeleteButton";
 import { Button } from "../ui/Button/Button";
 import { Icon } from "../ui/Icon/Icon";
+import { deleteTemolate } from "@/app/actions/Templates";
 
-export const TemplateList = ({ templates }: { templates: Template[] }) => {
+export const TemplateList = ({
+  templates,
+  accessToken,
+}: {
+  accessToken: string;
+  templates: Template[];
+}) => {
+
+  const handleUpdate = async (templateId:number) => {
+    console.log(templateId)
+  }
+
+  const handleDelete = async (templateId: number) => {
+    await deleteTemolate(accessToken, templateId);
+  };
+
   return (
     <div className={styles.listSection}>
       <h2 className={styles.listTitle}>
@@ -41,7 +57,11 @@ export const TemplateList = ({ templates }: { templates: Template[] }) => {
                   <div className={styles.buttonsContainer}>
                     <div className={styles.buttons}>
                       <div className={styles.applyButtonContainer}>
-                        <Button variant="primary" size="sm" className={styles.buttonApply}>
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          className={styles.buttonApply}
+                        >
                           Aplicar
                         </Button>
                       </div>
@@ -50,10 +70,19 @@ export const TemplateList = ({ templates }: { templates: Template[] }) => {
                           variant="outline"
                           size="sm"
                           leadingIcon={<Icon name="Edit" size={16} />}
+                          onClick={()=>handleUpdate(t.id)}
                         >
                           Editar
                         </Button>
-                        <DeleteButton />
+                        {/* <DeleteButton /> */}
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          leadingIcon={<Icon name="Trash2" size={16} />}
+                          onClick={() => handleDelete(t.id)}
+                        >
+                          Eliminar
+                        </Button>
                       </div>
                     </div>
                   </div>

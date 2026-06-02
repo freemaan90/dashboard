@@ -59,7 +59,7 @@ export default async function TemplatePage() {
       {/* Formulario */}
       <TemplateForm action={handleCreate} />
       {/* Lista */}
-      <TemplateList templates={templates} />
+      <TemplateList templates={templates} accessToken={session.accessToken} />
     </div>
   );
 }
