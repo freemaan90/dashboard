@@ -12,7 +12,9 @@ export const getAllTemplates = async (userId: string, accessToken: string): Prom
   });
 
   if (!res.ok) {
-    throw new Error("Error al obtener las plantillas");
+    const err = new Error("Error al obtener las plantillas") as Error & { statusCode: number };
+    err.statusCode = res.status;
+    throw err;
   }
   return res.json();
 }

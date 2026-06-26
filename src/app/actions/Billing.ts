@@ -59,7 +59,7 @@ export async function getPlans(): Promise<Plan[]> {
   }
 }
 
-export async function subscribeToPlan(planId: number): Promise<{ initPoint: string }> {
+export async function subscribeToPlan(planId: number): Promise<{ initPoint: string | null }> {
   const accessToken = await getAccessToken();
   if (!accessToken) throw new Error('Sin sesión activa');
 
@@ -111,8 +111,7 @@ export async function getInvoices(page = 1, limit = 10): Promise<InvoicesRespons
       }
     );
     if (!res.ok) return { data: [], total: 0, page, limit };
-    const json = await res.json();
-    return json?.data ?? json;
+    return res.json();
   } catch {
     return { data: [], total: 0, page, limit };
   }

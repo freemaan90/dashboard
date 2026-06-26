@@ -4,6 +4,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { TemplatePageClient } from "@/components/Template/TemplatePageClient";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 
 export default async function TemplatePage() {
   const session = await getServerSession(authOptions);
@@ -22,7 +23,28 @@ export default async function TemplatePage() {
   // SUPERVISOR / EMPLOYEE: use ownerId to see owner's templates.
   const effectiveOwnerId = session.user.ownerId ?? session.user.id;
 
-  const templates = await getAllTemplates(effectiveOwnerId, session.accessToken);
+  let templates;
+  try {
+    templates = await getAllTemplates(effectiveOwnerId, session.accessToken);
+  } catch (err: any) {
+    if (err.statusCode === 402) {
+      return (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "60vh", gap: "1rem", textAlign: "center", padding: "2rem" }}>
+          <span style={{ fontSize: "2.5rem" }}>🔒</span>
+          <h2 style={{ fontSize: "var(--font-size-h3)", fontWeight: "var(--font-weight-bold)", color: "var(--color-text-primary)", margin: 0 }}>
+            Necesitás un plan activo
+          </h2>
+          <p style={{ fontSize: "var(--font-size-body)", color: "var(--color-text-tertiary)", maxWidth: "420px", margin: 0 }}>
+            Las plantillas de mensajes están disponibles con cualquier plan. Elegí el que mejor se adapte a tu equipo y empezá a usarlas hoy.
+          </p>
+          <Link href="/dashboard/billing" style={{ display: "inline-block", marginTop: "0.5rem", padding: "0.75rem 1.5rem", background: "var(--color-primary-600, #7c3aed)", color: "#fff", borderRadius: "var(--radius-md)", fontWeight: "var(--font-weight-semibold)", fontSize: "var(--font-size-body)", textDecoration: "none" }}>
+            Ver planes
+          </Link>
+        </div>
+      );
+    }
+    throw err;
+  }
 
   const isEmployee = session.user.role === "EMPLOYEE";
 

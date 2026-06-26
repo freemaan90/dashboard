@@ -9,6 +9,7 @@ export interface Plan {
   features: string[];
   isActive: boolean;
   sortOrder: number;
+  isFree: boolean;
 }
 
 export interface BillingStatus {
